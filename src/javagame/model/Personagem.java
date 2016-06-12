@@ -15,6 +15,7 @@ import javagame.decorador.IComponente;
 import javagame.estrategia.Estrategia;
 import javagame.mediador.AbstractParticipante;
 import javagame.mediador.IMediador;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -47,8 +48,38 @@ public class Personagem extends AbstractParticipante implements IComponente {
         this.caracteristicas = caracteristicas;
     }
 
-    public Point getPoint() {
-        return point;
+    public int getY() {
+        return point.y;
+    }
+
+    public void setY(int y) {
+        point.y = y;
+    }
+
+    public int getX() {
+        return point.x;
+    }
+
+    public void setX(int x) {
+
+        int oldX = point.x;
+
+        point.x = x;
+
+        System.out.println(nome + " > " + point);
+        System.out.println(nome + " max " + getPontXmax());
+
+        if ((lado == Personagem_Enum.Lado.ESQUERDA
+                && getPontXmax() > mediador.getOutroPersonagem(this).getPontXmax())
+                || x < 10 || x > mediador.getCenario().getWidth()) {
+            point.x = oldX;
+        }
+        if ((lado == Personagem_Enum.Lado.DIREITA
+                && getPontXmax() < mediador.getOutroPersonagem(this).getPontXmax())
+                || x < 10 || x > mediador.getCenario().getWidth()) {
+            point.x = oldX;
+        }
+
     }
 
     public Estrategia getEstrategia() {
@@ -105,17 +136,15 @@ public class Personagem extends AbstractParticipante implements IComponente {
         return this.vida;
     }
 
-    Point getPontRelative() {
-        Point p = (Point) point.clone();
+    public int getPontXmax() {
 
-        if (lado == Personagem_Enum.Lado.ESQUERDA)
-        {
-            
-            IComponente meu = mediador.getComponenteBasedOnPersonagem(this);
-            
-           
+        ImageIcon ic = new ImageIcon(Personagem_Enum.personagens_path + caracteristicas.getProperty("ico"));
+
+        if (lado == Personagem_Enum.Lado.ESQUERDA) {
+            return point.x + (ic.getIconWidth() / 2);
         }
-        return p;
+
+        return mediador.getCenario().getWidth() - point.x - (ic.getIconWidth() / 2);
     }
 
 }

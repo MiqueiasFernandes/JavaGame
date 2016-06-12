@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import javagame.mediador.Mediador;
+import javagame.model.Personagem_Enum;
 import javagame.view.ChooseView;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -65,7 +66,7 @@ public class ChoosePresenter {
 
     private void chooseCenario() {
 
-        String cenarios[] = new File("src/javagame/cenarios/").list();
+        String cenarios[] = new File(Personagem_Enum.cenarios_path).list();
 
         if (cenarios != null) {
             String cenario = cenarios[(pos++ % cenarios.length)];
@@ -75,7 +76,7 @@ public class ChoosePresenter {
 
                 if (!cenario.contains(".gif")) {
 
-                    ImageIcon ic = new ImageIcon("src/javagame/cenarios/" + cenario);
+                    ImageIcon ic = new ImageIcon(Personagem_Enum.cenarios_path + cenario);
                     view.getCenarioLbl().setIcon(ic);
                 } else {
                     view.getCenarioLbl().setIcon(null);
@@ -87,7 +88,7 @@ public class ChoosePresenter {
 
     void popularPainel(JScrollPane panel) {
 
-        String personagens[] = new File("src/javagame/personagens/").list();
+        String personagens[] = new File(Personagem_Enum.personagens_path).list();
         Rectangle rectangle = null;
         if (personagens != null) {
             for (String personagen : personagens) {

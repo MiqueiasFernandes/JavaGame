@@ -30,7 +30,7 @@ public class AvancaPersonagem extends AbstractTratador {
         ///mudar estrategia
         personagem.setEstrategia(new Avancando(mediador.getComponenteBasedOnPersonagem(personagem)));
         ////avancar em x
-        personagem.getPoint().x += 10;
+        personagem.setX(personagem.getX() + 10);
 
         return false;
     }

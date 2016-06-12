@@ -82,10 +82,9 @@ public class Cenario extends JPanel {
             g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
         }
 
-        personagemA.getPoint().y = getHeight() - 500;
-        personagemB.getPoint().y = getHeight() - 500;
-        
-        
+        personagemA.setY(getHeight() - 500);
+        personagemB.setY(getHeight() - 500);
+
         if (personagemA.getEstrategia() != null) {
             personagemA.getEstrategia().desenhar_componente(
                     getOrientedGraphics(g.create(), personagemA), this);
@@ -109,7 +108,8 @@ public class Cenario extends JPanel {
         Graphics2D e = (Graphics2D) g;
 
         AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
-        tx.translate(-getWidth() - personagem.getPoint().x, 0);
+        tx.translate(-getWidth()
+                - personagem.getX(), 0);
         e.setTransform(tx);
 
         return g;

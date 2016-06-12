@@ -64,4 +64,7 @@ public class Personagem_Enum {
 
     }
 
+    static public String personagens_path = "src/javagame/personagens/";
+    static public String cenarios_path = "src/javagame/cenarios/";
+
 }

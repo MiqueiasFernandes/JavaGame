@@ -23,7 +23,7 @@ public class Luva extends AbstractDecorador {
     public void ocioso(Graphics graphics, ImageObserver imageObserver) {
         decorado.ocioso(graphics, imageObserver);
         if (ocioso != null) {
-            graphics.drawImage(ocioso, personagem.getPoint().x, personagem.getPoint().y, imageObserver);
+            graphics.drawImage(ocioso, personagem.getX(), personagem.getY(), imageObserver);
         }
     }
 
@@ -31,7 +31,7 @@ public class Luva extends AbstractDecorador {
     public void agredindo(Graphics graphics, ImageObserver imageObserver) {
         decorado.agredindo(graphics, imageObserver);
         if (agredindo != null) {
-            graphics.drawImage(agredindo, personagem.getPoint().x, personagem.getPoint().y, imageObserver);
+            graphics.drawImage(agredindo, personagem.getX(), personagem.getY(), imageObserver);
         }
     }
 
@@ -44,7 +44,7 @@ public class Luva extends AbstractDecorador {
     public void avancando(Graphics graphics, ImageObserver imageObserver) {
         decorado.avancando(graphics, imageObserver);
         if (avancando != null) {
-            graphics.drawImage(avancando, personagem.getPoint().x, personagem.getPoint().y, imageObserver);
+            graphics.drawImage(avancando, personagem.getX(), personagem.getY(), imageObserver);
         }
     }
 
@@ -52,7 +52,7 @@ public class Luva extends AbstractDecorador {
     public void recuando(Graphics graphics, ImageObserver imageObserver) {
         decorado.recuando(graphics, imageObserver);
         if (recuando != null) {
-            graphics.drawImage(recuando, personagem.getPoint().x, personagem.getPoint().y, imageObserver);
+            graphics.drawImage(recuando, personagem.getX(), personagem.getY(), imageObserver);
         }
     }
 

@@ -25,8 +25,8 @@ public class Corpo extends AbstractDecorador {
     public void ocioso(Graphics graphics, ImageObserver imageObserver) {
         decorado.ocioso(graphics, imageObserver);
         if (ocioso != null) {
-            graphics.translate(personagem.getPoint().x, 0);
-            graphics.drawImage(ocioso, personagem.getPoint().x, personagem.getPoint().y, imageObserver);
+            graphics.translate(personagem.getX(), 0);
+            graphics.drawImage(ocioso, personagem.getX(), personagem.getY(), imageObserver);
         }
     }
 
@@ -34,8 +34,8 @@ public class Corpo extends AbstractDecorador {
     public void agredindo(Graphics graphics, ImageObserver imageObserver) {
         decorado.agredindo(graphics, imageObserver);
         if (agredindo != null) {
-            graphics.translate(personagem.getPoint().x, 0);
-            graphics.drawImage(agredindo, personagem.getPoint().x, personagem.getPoint().y, imageObserver);
+            graphics.translate(personagem.getX(), 0);
+            graphics.drawImage(agredindo, personagem.getX(), personagem.getY(), imageObserver);
 
         }
     }
@@ -44,8 +44,8 @@ public class Corpo extends AbstractDecorador {
     public void defendendo(Graphics graphics, ImageObserver imageObserver) {
         decorado.defendendo(graphics, imageObserver);
         if (defendendo != null) {
-            graphics.translate(personagem.getPoint().x, 0);
-            graphics.drawImage(defendendo, personagem.getPoint().x, personagem.getPoint().y, imageObserver);
+            graphics.translate(personagem.getX(), 0);
+            graphics.drawImage(defendendo, personagem.getX(), personagem.getY(), imageObserver);
 
         }
     }
@@ -54,8 +54,8 @@ public class Corpo extends AbstractDecorador {
     public void avancando(Graphics graphics, ImageObserver imageObserver) {
         decorado.avancando(graphics, imageObserver);
         if (avancando != null) {
-            graphics.translate(personagem.getPoint().x, 0);
-            graphics.drawImage(avancando, personagem.getPoint().x, personagem.getPoint().y, imageObserver);
+            graphics.translate(personagem.getX(), 0);
+            graphics.drawImage(avancando, personagem.getX(), personagem.getY(), imageObserver);
 
         }
     }
@@ -64,8 +64,8 @@ public class Corpo extends AbstractDecorador {
     public void recuando(Graphics graphics, ImageObserver imageObserver) {
         decorado.recuando(graphics, imageObserver);
         if (recuando != null) {
-            graphics.translate(personagem.getPoint().x, 0);
-            graphics.drawImage(recuando, personagem.getPoint().x, personagem.getPoint().y, imageObserver);
+            graphics.translate(personagem.getX(), 0);
+            graphics.drawImage(recuando, personagem.getX(), personagem.getY(), imageObserver);
 
         }
     }

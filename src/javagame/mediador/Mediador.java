@@ -57,7 +57,7 @@ public class Mediador implements IMediador {
         ringView = new RingView();
 
         Image im = null;
-        String background = ("src/javagame/cenarios/" + b_cenario);
+        String background = (Personagem_Enum.cenarios_path + b_cenario);
         im = Toolkit.getDefaultToolkit().getImage(background);
 
         Placar placar = new Placar(this);
@@ -122,6 +122,12 @@ public class Mediador implements IMediador {
     public IComponente getComponenteBasedOnPersonagem(Personagem personagem) {
         return personagem == personagem_A ? componenteA
                 : personagem == personagem_B ? componenteB : null;
+    }
+
+    @Override
+    public Personagem getOutroPersonagem(Personagem personagem) {
+        return personagem == personagem_A ? personagem_B
+                : personagem == personagem_B ? personagem_A : null;
     }
 
 }

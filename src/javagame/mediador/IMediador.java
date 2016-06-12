@@ -29,5 +29,7 @@ public interface IMediador {
     public IComponente getComponenteB();
 
     public IComponente getComponenteBasedOnPersonagem(Personagem personagem);
+    
+    public Personagem getOutroPersonagem(Personagem personagem);
 
 }
