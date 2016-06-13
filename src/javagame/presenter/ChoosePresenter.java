@@ -71,7 +71,8 @@ public class ChoosePresenter {
         if (cenarios != null) {
             String cenario = cenarios[(pos++ % cenarios.length)];
 
-            if (cenario.contains(".jpg") || cenario.contains(".png") || cenario.contains(".gif")) {
+            if ((cenario.contains(".jpg") || cenario.contains(".png") || cenario.contains(".gif"))
+                    && !cenario.contains("score") && !cenario.contains("gameover")) {
                 view.getCenarioLbl().setText(cenario);
 
                 if (!cenario.contains(".gif")) {
@@ -106,7 +107,7 @@ public class ChoosePresenter {
                     button.setVisible(true);
                 }
             }
-           
+
         }
     }
 

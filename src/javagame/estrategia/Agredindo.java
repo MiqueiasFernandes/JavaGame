@@ -22,15 +22,8 @@ public class Agredindo extends Estrategia {
     }
 
     @Override
-    public int calculaPrejuizo(Personagem de) {
-
-        ////os dois agridem
-        if (this == de.getEstrategia()) {
-            return 2;
-        }
-
-        return 0;
-
+    public int calculaPrejuizo() {
+        return 3;
     }
 
 }

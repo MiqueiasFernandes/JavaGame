@@ -29,6 +29,7 @@ public class Personagem extends AbstractParticipante implements IComponente {
     private String nome;
     private final Personagem_Enum.Lado lado;
     private int vida;
+    private ImageIcon icon;
 
     public Personagem(IMediador mediador, String nome, String personagem, Personagem_Enum.Lado lado) throws IOException {
         super(mediador);
@@ -38,6 +39,10 @@ public class Personagem extends AbstractParticipante implements IComponente {
         caracteristicas.load(new FileReader("src/javagame/personagens/" + personagem + ".properties"));
         point = new Point(0, 0);
         this.lado = lado;
+        this.icon = new ImageIcon(Personagem_Enum.personagens_path + caracteristicas.getProperty("ico"));
+        if (lado == Personagem_Enum.Lado.DIREITA) {
+            point.x = icon.getIconWidth() + 50;
+        }
     }
 
     public Properties getCaracteristicas() {
@@ -58,28 +63,51 @@ public class Personagem extends AbstractParticipante implements IComponente {
 
     public int getX() {
         return point.x;
+
+    }
+
+    public int getX(boolean convergido) {
+        if (!convergido) {
+            return point.x;
+        }
+        int iw = icon.getIconWidth() / 2;
+        return lado == Personagem_Enum.Lado.ESQUERDA
+                ? (point.x + iw)
+                : (point.x - iw);
     }
 
     public void setX(int x) {
-
-        int oldX = point.x;
-
+        int oldx = getX();
+        int w = mediador.getCenario().getWidth();
         point.x = x;
+        if (lado == Personagem_Enum.Lado.ESQUERDA) {
 
-        System.out.println(nome + " > " + point);
-        System.out.println(nome + " max " + getPontXmax());
+            if (getX(true) > w && x > oldx) {
+                point.x = oldx;
+            }
 
-        if ((lado == Personagem_Enum.Lado.ESQUERDA
-                && getPontXmax() > mediador.getOutroPersonagem(this).getPontXmax())
-                || x < 10 || x > mediador.getCenario().getWidth()) {
-            point.x = oldX;
+            if (getX() < 0 && x < oldx) {
+                point.x = oldx;
+            }
+
+            if (getX(true) > mediador.getOutroPersonagem(this).getX(true) && x > oldx) {
+                point.x = oldx;
+            }
+
+        } else {
+
+            if (getX() > w && x > oldx) {
+                point.x = oldx;
+            }
+
+            if (getX(true) < 0 && x < oldx) {
+                point.x = oldx;
+            }
+
+            if (getX(true) < mediador.getOutroPersonagem(this).getX(true) && x < oldx) {
+                point.x = oldx;
+            }
         }
-        if ((lado == Personagem_Enum.Lado.DIREITA
-                && getPontXmax() < mediador.getOutroPersonagem(this).getPontXmax())
-                || x < 10 || x > mediador.getCenario().getWidth()) {
-            point.x = oldX;
-        }
-
     }
 
     public Estrategia getEstrategia() {
@@ -98,53 +126,59 @@ public class Personagem extends AbstractParticipante implements IComponente {
         return nome;
     }
 
+    void mostrap(Graphics graphics) {
+        graphics.fillRect(getX(true), point.y, 10, 10);
+    }
+
     @Override
     public void ocioso(Graphics graphics, ImageObserver imageObserver) {
+        mostrap(graphics);
 
     }
 
     @Override
     public void agredindo(Graphics graphics, ImageObserver imageObserver) {
+        mostrap(graphics);
     }
 
     @Override
     public void defendendo(Graphics graphics, ImageObserver imageObserver) {
-
+        mostrap(graphics);
     }
 
     @Override
     public void avancando(Graphics graphics, ImageObserver imageObserver) {
-
+        mostrap(graphics);
     }
 
     @Override
     public void recuando(Graphics graphics, ImageObserver imageObserver) {
-
+        mostrap(graphics);
     }
 
     @Override
     public void computaPrejuizo(Personagem de, Personagem para) {
 
+      //  System.out.println("esta encostando " + estaEncostando(para) + " vida " + vida + " prej " + estrategia.calculaPrejuizo());
+
         if (de == this) {
             return;
         }
+        if (estaEncostando(de /* ESTE É O OUTRO PERSONAGEM */ )) {
+            vida -= estrategia.calculaPrejuizo();
+        }
+    }
 
-        //   vida -= estrategia.calculaPrejuizo(de);
+    public boolean estaEncostando(Personagem outro) {
+
+        return (lado == Personagem_Enum.Lado.ESQUERDA)
+                ? getX(true) >= outro.getX(true) && getX(true) < outro.getX()
+                : getX(true) <= outro.getX(true) && getX(true) > outro.getX();
+
     }
 
     public int getVida() {
         return this.vida;
-    }
-
-    public int getPontXmax() {
-
-        ImageIcon ic = new ImageIcon(Personagem_Enum.personagens_path + caracteristicas.getProperty("ico"));
-
-        if (lado == Personagem_Enum.Lado.ESQUERDA) {
-            return point.x + (ic.getIconWidth() / 2);
-        }
-
-        return mediador.getCenario().getWidth() - point.x - (ic.getIconWidth() / 2);
     }
 
 }

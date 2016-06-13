@@ -12,6 +12,7 @@ import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javagame.model.Personagem;
+import javagame.model.Personagem_Enum;
 import javagame.view.Cenario;
 
 /**
@@ -20,16 +21,17 @@ import javagame.view.Cenario;
  */
 public class Placar extends AbstractParticipante {
 
-    private int vidaA = 100, vidaB = 100, tempo = 100;
+    private int tempo = 100;
     private Color va = Color.cyan, vb = Color.GREEN, tp = Color.DARK_GRAY;
     private Image img_placar;
 
     public Placar(IMediador mediador) {
         super(mediador);
-        String nome_perso = ("src/javagame/cenarios/path4155.png");
+        String nome_perso = (Personagem_Enum.cenarios_path + "score.png");
         img_placar = Toolkit.getDefaultToolkit().getImage(nome_perso);
 
         new Thread(() -> {
+
             while (tempo > 0) {
 
                 try {
@@ -41,6 +43,8 @@ public class Placar extends AbstractParticipante {
                 setTempo(tempo - 1);
 
             }
+
+            mediador.gameOver(Personagem_Enum.ModoGameOver.TIME_OUT);
 
         }).start();
 
@@ -73,24 +77,26 @@ public class Placar extends AbstractParticipante {
         ///progressbar vida a 
         g.setColor(va);
         g.fillRect(x + (w / 25), (y + (h / 2) + (h / 7)),
-                ((w / 3) * vidaA) / (100),
+                ((w / 3) * getVidaA()) / (100),
                 h / 30);
         g.drawString(mediador.getPersonagemA().getNome(), x + (w / 5), (y + (h / 2) + (h / 13)));
 
         ///progressbar vida b
         g.setColor(vb);
         g.fillRect(x + (w / 2) + (w / 16), (y + (h / 2) + (h / 7)),
-                ((w / 3) * vidaB) / (100),
+                ((w / 3) * getVidaB()) / (100),
                 h / 30);
         g.drawString(mediador.getPersonagemB().getNome(), x + (w / 2) + (w / 5), (y + (h / 2) + (h / 13)));
     }
 
     public int getVidaA() {
-        return vidaA;
+        setVidaA(mediador.getPersonagemA().getVida());
+        return mediador.getPersonagemA().getVida();
     }
 
     public int getVidaB() {
-        return vidaB;
+        setVidaB(mediador.getPersonagemB().getVida());
+        return mediador.getPersonagemB().getVida();
     }
 
     public int getTempo() {
@@ -100,13 +106,11 @@ public class Placar extends AbstractParticipante {
     public void setVidaA(int vidaA) {
         int val = getInterval(vidaA);
         va = setCor(val, va);
-        this.vidaA = val;
     }
 
     public void setVidaB(int vidaB) {
         int val = getInterval(vidaB);
         vb = setCor(val, vb);
-        this.vidaB = val;
     }
 
     public void setTempo(int tempo) {
@@ -128,8 +132,8 @@ public class Placar extends AbstractParticipante {
     }
 
     int getInterval(int val) {
-        if (val < 1) {
-            return 1;
+        if (val < 0) {
+            return 0;
         }
         if (val > 100) {
             return 100;

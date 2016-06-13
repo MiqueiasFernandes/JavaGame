@@ -28,7 +28,11 @@ public class RecuaPersonagem extends AbstractTratador {
         Personagem personagem = getPersonagemBasedLeter(mediador, e, Personagem_Enum.KEY_PERSONAGEM_A_RECUA);
 
         personagem.setEstrategia(new Recuando(mediador.getComponenteBasedOnPersonagem(personagem)));
-        personagem.setX(personagem.getX() - 10);
+         if (personagem.getLado() == Personagem_Enum.Lado.ESQUERDA) {
+            personagem.setX(personagem.getX() - 10);
+        } else {
+            personagem.setX(personagem.getX() + 10);
+        }
 
         return false;
     }

@@ -22,7 +22,7 @@ public class Defendendo extends Estrategia {
     }
 
     @Override
-    public int calculaPrejuizo(Personagem de) {
+    public int calculaPrejuizo() {
         return 0;
     }
 

@@ -22,8 +22,8 @@ public class Recuando extends Estrategia {
     }
 
     @Override
-    public int calculaPrejuizo(Personagem de) {
-        return 0;
+    public int calculaPrejuizo() {
+        return 1;
     }
 
 }

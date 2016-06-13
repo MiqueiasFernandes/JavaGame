@@ -7,6 +7,7 @@ package javagame.mediador;
 
 import javagame.decorador.IComponente;
 import javagame.model.Personagem;
+import javagame.model.Personagem_Enum;
 import javagame.view.Cenario;
 import javagame.view.RingView;
 
@@ -29,7 +30,11 @@ public interface IMediador {
     public IComponente getComponenteB();
 
     public IComponente getComponenteBasedOnPersonagem(Personagem personagem);
-    
+
     public Personagem getOutroPersonagem(Personagem personagem);
+
+    public void setAtaque(Personagem de, Personagem para);
+
+    public void gameOver(Personagem_Enum.ModoGameOver modo);
 
 }

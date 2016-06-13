@@ -14,6 +14,7 @@ import javagame.chain.DefendePersonagem;
 import javagame.chain.InputChain;
 import javagame.chain.Ociosopersonagem;
 import javagame.chain.RecuaPersonagem;
+import javagame.chain.SairDoJogo;
 import javagame.model.Personagem;
 import javagame.model.Personagem_Enum;
 import javagame.view.Cenario;
@@ -34,6 +35,7 @@ public class Input extends AbstractParticipante {
         inputChain.addTratador(new RecuaPersonagem());
         inputChain.addTratador(new AtacaPersonagem());
         inputChain.addTratador(new DefendePersonagem());
+        inputChain.addTratador(new SairDoJogo());
 
         RingView ringView = mediador.getRingView();
         Cenario cenario = mediador.getCenario();
@@ -78,7 +80,15 @@ public class Input extends AbstractParticipante {
 
     @Override
     public void computaPrejuizo(Personagem de, Personagem para) {
-    
+
+        if (mediador.getPersonagemA().getVida() <= 0) {
+            mediador.gameOver(Personagem_Enum.ModoGameOver.A_PERDEU);
+        }
+        
+        if (mediador.getPersonagemB().getVida() <= 0) {
+            mediador.gameOver(Personagem_Enum.ModoGameOver.B_PERDEU);
+        }
+
     }
 
 }

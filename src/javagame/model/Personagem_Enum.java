@@ -32,6 +32,13 @@ public class Personagem_Enum {
         PULANDO
     }
 
+    public enum ModoGameOver {
+        TIME_OUT,
+        DESISTENCIA,
+        A_PERDEU,
+        B_PERDEU,
+    }
+
     public static final char KEY_PERSONAGEM_A_RECUA = 'a';
     public static final char KEY_PERSONAGEM_A_AVANCA = 'd';
     public static final char KEY_PERSONAGEM_A_OCIOSO = 'z';
@@ -43,6 +50,8 @@ public class Personagem_Enum {
     public static final char KEY_PERSONAGEM_B_OCIOSO = 'b';
     public static final char KEY_PERSONAGEM_B_ATAQUE = 'n';
     public static final char KEY_PERSONAGEM_B_DEFESA = 'm';
+
+    public static final char KEY_SAIR_DO_JOGO = 'q';
 
     static public boolean pertence_A(char k) {
 

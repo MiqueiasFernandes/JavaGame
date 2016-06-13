@@ -24,6 +24,6 @@ public abstract class Estrategia {
 
     public abstract void desenhar_componente(Graphics graphics, ImageObserver imageObserver);
 
-    public abstract int calculaPrejuizo(Personagem de);
+    public abstract int calculaPrejuizo();
 
 }

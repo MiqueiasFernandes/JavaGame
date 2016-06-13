@@ -7,10 +7,10 @@ package javagame.view;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.MediaTracker;
-import java.awt.geom.AffineTransform;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import javagame.mediador.Placar;
 import javagame.model.Personagem;
 import javagame.model.Personagem_Enum;
@@ -29,6 +29,8 @@ public class Cenario extends JPanel {
     Placar placar;
     MediaTracker media;
     int id = 0;
+    boolean freeze = false;
+    BufferedImage imageFrozen;
 
     public Cenario(Image background, RingView ringView, Personagem a, Personagem b, Placar placar) {
         this.personagemA = a;
@@ -50,7 +52,7 @@ public class Cenario extends JPanel {
         }
 
         this.setDoubleBuffered(true);
-
+        imageFrozen = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
     }
 
     public void encaixar(JFrame view) {
@@ -73,10 +75,33 @@ public class Cenario extends JPanel {
         return id;
     }
 
+    public void freeze() {
+
+        if (!freeze) {
+            Graphics g = imageFrozen.createGraphics();
+            paint(g);
+            g.setColor(new Color(0, 0, 0, 100));
+            g.fillRect(0, 0, getWidth(), getHeight());
+            String img = (Personagem_Enum.cenarios_path + "gameover.png");
+            Image im = Toolkit.getDefaultToolkit().getImage(img);
+            if (im != null) {
+                g.drawImage(im, 0, 0, getWidth(), getHeight(), this);
+            }
+            g.setColor(Color.red);
+            g.drawString("game over!", 0, 0);
+            freeze = true;
+        }
+    }
+
     @Override
     public void paint(Graphics g) {
 
         super.paint(g);
+
+        if (freeze) {
+            g.drawImage(imageFrozen, 0, 0, null);
+            return;
+        }
 
         if (background != null) {
             g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
@@ -87,32 +112,14 @@ public class Cenario extends JPanel {
 
         if (personagemA.getEstrategia() != null) {
             personagemA.getEstrategia().desenhar_componente(
-                    getOrientedGraphics(g.create(), personagemA), this);
+                    g.create(), this);
         }
         if (personagemB.getEstrategia() != null) {
             personagemB.getEstrategia().desenhar_componente(
-                    getOrientedGraphics(g.create(), personagemB), this);
+                    g.create(), this);
         }
 
         placar.pintar(g, this);
-
-    }
-
-    Graphics getOrientedGraphics(Graphics g, Personagem personagem) {
-        if (personagem.getLado() == Personagem_Enum.Lado.ESQUERDA) {
-            return g;
-        }
-
-        g = g.create();
-
-        Graphics2D e = (Graphics2D) g;
-
-        AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
-        tx.translate(-getWidth()
-                - personagem.getX(), 0);
-        e.setTransform(tx);
-
-        return g;
 
     }
 

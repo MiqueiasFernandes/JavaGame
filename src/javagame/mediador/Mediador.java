@@ -66,6 +66,8 @@ public class Mediador implements IMediador {
         personagem_A.setEstrategia(new Ocioso(componenteA));
         personagem_B.setEstrategia(new Ocioso(componenteB));
 
+        personagem_B.setX(0);
+
         ringView.setVisible(true);
 
         Input input = new Input(this);
@@ -128,6 +130,32 @@ public class Mediador implements IMediador {
     public Personagem getOutroPersonagem(Personagem personagem) {
         return personagem == personagem_A ? personagem_B
                 : personagem == personagem_B ? personagem_A : null;
+    }
+
+    @Override
+    public void setAtaque(Personagem de, Personagem para) {
+        for (AbstractParticipante participante : participantes) {
+            participante.computaPrejuizo(de, para);
+        }
+    }
+
+    @Override
+    public void gameOver(Personagem_Enum.ModoGameOver modo) {
+        switch (modo) {
+            case DESISTENCIA:
+                System.out.println("fim de jogo desistencia");
+                break;
+            case A_PERDEU:
+                System.out.println("fim de jogo A perdeu");
+                break;
+            case B_PERDEU:
+                System.out.println("fim de jogo B perdeu");
+                break;
+            case TIME_OUT:
+                System.out.println("fim de jogo tempo esgotado");
+                break;
+        }
+        cenario.freeze();
     }
 
 }

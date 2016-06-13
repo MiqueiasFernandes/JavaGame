@@ -22,10 +22,8 @@ public class Avancando extends Estrategia {
     }
 
     @Override
-    public int calculaPrejuizo(Personagem de) {
-  
-    return 0;
-    
+    public int calculaPrejuizo() {
+        return 5;
     }
 
 }

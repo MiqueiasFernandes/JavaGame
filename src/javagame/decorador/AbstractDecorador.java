@@ -5,8 +5,11 @@
  */
 package javagame.decorador;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.geom.AffineTransform;
 import javagame.mediador.IMediador;
 import javagame.model.Personagem;
 import javagame.model.Personagem_Enum;
@@ -41,6 +44,25 @@ public abstract class AbstractDecorador implements IComponente {
             cenario.addImageTracker(im);
         }
         return im;
+    }
+
+    Graphics getOrientedGraphics(Graphics g) {
+        if (personagem.getLado() == Personagem_Enum.Lado.ESQUERDA) {
+            return g;
+        }
+
+        g = g.create();
+        int w = personagem.getMediador().getCenario().getWidth();
+        Graphics2D e = (Graphics2D) g;
+
+        AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+        tx.translate(-w
+                - personagem.getX(), 0);
+        e.setTransform(tx);
+        e.translate(w - personagem.getX(), 0);
+
+        return g;
+
     }
 
 }
