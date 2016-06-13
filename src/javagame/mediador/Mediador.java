@@ -73,6 +73,8 @@ public class Mediador implements IMediador {
         participantes.add(personagem_B);
         participantes.add(placar);
         participantes.add(input);
+
+        ringView.setTitle("JavaGame - " + personagem_A.getNome() + " X " + personagem_B.getNome());
     }
 
     Builder getBuilderBasedOnName(String tipo) throws IOException {
@@ -138,19 +140,23 @@ public class Mediador implements IMediador {
     @Override
     public void gameOver(Personagem_Enum.ModoGameOver modo) {
         switch (modo) {
-            case DESISTENCIA:
-                System.out.println("fim de jogo desistencia");
+            case A_GANHOU:
+                System.out.println("fim de jogo A - " + personagem_A.getNome() + " ganhou");
                 break;
-            case A_PERDEU:
-                System.out.println("fim de jogo A perdeu");
-                break;
-            case B_PERDEU:
-                System.out.println("fim de jogo B perdeu");
+            case B_GANHOU:
+                System.out.println("fim de jogo B - " + personagem_B.getNome() + " ganhou");
                 break;
             case TIME_OUT:
                 System.out.println("fim de jogo tempo esgotado");
                 break;
+            case DESISTENCIA:
+                System.out.println("fim de jogo desistencia");
+                break;
         }
+
+        System.out.println("pontos A (" + personagem_A.getNome() + "): " + personagem_A.getVida());
+        System.out.println("pontos B (" + personagem_B.getNome() + "): " + personagem_B.getVida());
+
         cenario.freeze();
     }
 

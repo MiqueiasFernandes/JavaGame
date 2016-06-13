@@ -81,12 +81,16 @@ public class Input extends AbstractParticipante {
     @Override
     public void computaPrejuizo(Personagem de, Personagem para) {
 
-        if (mediador.getPersonagemA().getVida() <= 0) {
-            mediador.gameOver(Personagem_Enum.ModoGameOver.A_PERDEU);
+        if (mediador.getPersonagemA().getVida() <= 0 && mediador.getPersonagemB().getVida() > 0) {
+            mediador.gameOver(Personagem_Enum.ModoGameOver.B_GANHOU);
         }
 
-        if (mediador.getPersonagemB().getVida() <= 0) {
-            mediador.gameOver(Personagem_Enum.ModoGameOver.B_PERDEU);
+        if (mediador.getPersonagemB().getVida() <= 0 && mediador.getPersonagemA().getVida() > 0) {
+            mediador.gameOver(Personagem_Enum.ModoGameOver.A_GANHOU);
+        }
+
+        if (mediador.getPersonagemB().getVida() <= 0 && mediador.getPersonagemA().getVida() <= 0) {
+            mediador.gameOver(Personagem_Enum.ModoGameOver.EMPATOU);
         }
 
     }

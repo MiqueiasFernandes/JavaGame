@@ -35,6 +35,8 @@ public class JavaGame {
             }
         });
 
+        mainView.setTitle("Insira o nome dos jogadores");
+        
         mainView.setVisible(true);
 
     }

@@ -90,7 +90,7 @@ public class Cenario extends JPanel {
         super.paint(g);
 
         if (freeze) {
-            g.drawImage(imageFrozen, 0, 0, null);
+            g.drawImage(imageFrozen, 0, 0, getWidth(), getHeight(), this);
             return;
         }
 
@@ -111,6 +111,8 @@ public class Cenario extends JPanel {
         }
 
         placar.pintar(g, this);
+        g.setColor(Color.CYAN);
+        g.drawString("miqueiasfernandes.com.br 13/06/16", getWidth() / 2, getHeight() - 5);
 
     }
 

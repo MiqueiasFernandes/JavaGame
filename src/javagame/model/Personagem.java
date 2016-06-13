@@ -171,8 +171,8 @@ public class Personagem extends AbstractParticipante implements IComponente {
     public boolean estaEncostando(Personagem outro) {
 
         return (lado == Personagem_Enum.Lado.ESQUERDA)
-                ? getX(true) >= outro.getX(true) && getX(true) < outro.getX()
-                : getX(true) <= outro.getX(true) && getX(true) > outro.getX();
+                ? (getX(true) + 130) >= outro.getX(true) && getX(true) < outro.getX()
+                : (getX(true) - 130) <= outro.getX(true) && getX(true) > outro.getX();
 
     }
 

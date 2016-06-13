@@ -61,6 +61,8 @@ public class ChoosePresenter {
             }
         });
 
+        view.setTitle("Escolha os personagens e o cenário do jogo");
+
         view.setVisible(true);
         view.invalidate();
         view.repaint();

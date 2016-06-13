@@ -25,8 +25,9 @@ public class Personagem_Enum {
     public enum ModoGameOver {
         TIME_OUT,
         DESISTENCIA,
-        A_PERDEU,
-        B_PERDEU,
+        A_GANHOU,
+        B_GANHOU,
+        EMPATOU
     }
 
     public static final char KEY_PERSONAGEM_A_RECUA = 'a';
