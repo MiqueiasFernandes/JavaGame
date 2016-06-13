@@ -36,7 +36,7 @@ public class Personagem extends AbstractParticipante implements IComponente {
         this.nome = nome;
         this.vida = 100;
         caracteristicas = new Properties();
-        caracteristicas.load(new FileReader("src/javagame/personagens/" + personagem + ".properties"));
+        caracteristicas.load(new FileReader(Personagem_Enum.personagens_path + personagem + ".properties"));
         point = new Point(0, 0);
         this.lado = lado;
         this.icon = new ImageIcon(Personagem_Enum.personagens_path + caracteristicas.getProperty("ico"));

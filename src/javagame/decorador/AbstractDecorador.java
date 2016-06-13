@@ -10,6 +10,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
+import java.awt.image.ImageObserver;
 import javagame.mediador.IMediador;
 import javagame.model.Personagem;
 import javagame.model.Personagem_Enum;
@@ -59,6 +60,16 @@ public abstract class AbstractDecorador implements IComponente {
         e.setTransform(tx);
         e.translate(w - personagem.getX(), 0);
         return g;
+    }
+
+    public void pintarImagem(Image imagem, ImageObserver imageObserver, Graphics graphics) {
+        if (imagem != null) {
+            graphics.translate(personagem.getX(), 0);
+            getOrientedGraphics(graphics).drawImage(imagem,
+                    personagem.getLado() == Personagem_Enum.Lado.DIREITA ? personagem.getX() : 0,
+                    personagem.getY(), imageObserver);
+
+        }
     }
 
 }

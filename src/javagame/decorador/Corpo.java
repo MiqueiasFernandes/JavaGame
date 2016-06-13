@@ -8,7 +8,6 @@ package javagame.decorador;
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
 import javagame.model.Personagem;
-import javagame.model.Personagem_Enum;
 
 public class Corpo extends AbstractDecorador {
 
@@ -24,60 +23,31 @@ public class Corpo extends AbstractDecorador {
     @Override
     public void ocioso(Graphics graphics, ImageObserver imageObserver) {
         decorado.ocioso(graphics, imageObserver);
-        if (ocioso != null) {
-            graphics.translate(personagem.getX(), 0);
-            getOrientedGraphics(graphics).drawImage(ocioso,
-                    personagem.getLado() == Personagem_Enum.Lado.DIREITA ? personagem.getX() : 0,
-                    personagem.getY(), imageObserver);
-        }
+        pintarImagem(ocioso, imageObserver, graphics);
     }
 
     @Override
     public void agredindo(Graphics graphics, ImageObserver imageObserver) {
         decorado.agredindo(graphics, imageObserver);
-        if (agredindo != null) {
-            graphics.translate(personagem.getX(), 0);
-            getOrientedGraphics(graphics).drawImage(agredindo,
-                    personagem.getLado() == Personagem_Enum.Lado.DIREITA ? personagem.getX() : 0,
-                    personagem.getY(), imageObserver);
-
-        }
+        pintarImagem(agredindo, imageObserver, graphics);
     }
 
     @Override
     public void defendendo(Graphics graphics, ImageObserver imageObserver) {
         decorado.defendendo(graphics, imageObserver);
-        if (defendendo != null) {
-            graphics.translate(personagem.getX(), 0);
-            getOrientedGraphics(graphics).drawImage(defendendo,
-                    personagem.getLado() == Personagem_Enum.Lado.DIREITA ? personagem.getX() : 0,
-                    personagem.getY(), imageObserver);
-
-        }
+        pintarImagem(defendendo, imageObserver, graphics);
     }
 
     @Override
     public void avancando(Graphics graphics, ImageObserver imageObserver) {
         decorado.avancando(graphics, imageObserver);
-        if (avancando != null) {
-            graphics.translate(personagem.getX(), 0);
-            getOrientedGraphics(graphics).drawImage(avancando,
-                    personagem.getLado() == Personagem_Enum.Lado.DIREITA ? personagem.getX() : 0,
-                    personagem.getY(), imageObserver);
-
-        }
+        pintarImagem(avancando, imageObserver, graphics);
     }
 
     @Override
     public void recuando(Graphics graphics, ImageObserver imageObserver) {
         decorado.recuando(graphics, imageObserver);
-        if (recuando != null) {
-            graphics.translate(personagem.getX(), 0);
-            getOrientedGraphics(graphics).drawImage(recuando,
-                    personagem.getLado() == Personagem_Enum.Lado.DIREITA ? personagem.getX() : 0,
-                    personagem.getY(), imageObserver);
-
-        }
+        pintarImagem(recuando, imageObserver, graphics);
     }
 
 }
