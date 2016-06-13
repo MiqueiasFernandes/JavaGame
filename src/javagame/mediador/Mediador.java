@@ -41,8 +41,7 @@ public class Mediador implements IMediador {
         new ChoosePresenter(nome_personagem_A, nome_personagem_B, this);
     }
 
-    public void inicializar(String personagem_a, String personagem_b, String b_cenario) throws IOException {
-
+    public void inicializar(String personagem_a, String personagem_b, String b_cenario) throws IOException, InterruptedException {
         Builder buildA = getBuilderBasedOnName(personagem_a);
         Builder buildB = getBuilderBasedOnName(personagem_b);
 
@@ -66,8 +65,6 @@ public class Mediador implements IMediador {
         personagem_A.setEstrategia(new Ocioso(componenteA));
         personagem_B.setEstrategia(new Ocioso(componenteB));
 
-        personagem_B.setX(0);
-
         ringView.setVisible(true);
 
         Input input = new Input(this);
@@ -76,7 +73,6 @@ public class Mediador implements IMediador {
         participantes.add(personagem_B);
         participantes.add(placar);
         participantes.add(input);
-
     }
 
     Builder getBuilderBasedOnName(String tipo) throws IOException {

@@ -7,7 +7,6 @@ package javagame.builder;
 
 import javagame.decorador.Luva;
 
-
 public class King_especial extends Builder {
 
     @Override

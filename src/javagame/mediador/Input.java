@@ -84,7 +84,7 @@ public class Input extends AbstractParticipante {
         if (mediador.getPersonagemA().getVida() <= 0) {
             mediador.gameOver(Personagem_Enum.ModoGameOver.A_PERDEU);
         }
-        
+
         if (mediador.getPersonagemB().getVida() <= 0) {
             mediador.gameOver(Personagem_Enum.ModoGameOver.B_PERDEU);
         }

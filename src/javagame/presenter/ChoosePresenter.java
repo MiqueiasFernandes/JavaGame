@@ -28,9 +28,9 @@ import javax.swing.JToggleButton;
 public class ChoosePresenter {
 
     private String personagem_A, personagem_B;
-    ChooseView view;
-    int pos = 0;
-    Mediador mediador;
+    private ChooseView view;
+    private int pos = 0;
+    private Mediador mediador;
 
     public ChoosePresenter(String nomeA, String nomeB, Mediador mediador) {
 
@@ -55,6 +55,8 @@ public class ChoosePresenter {
             try {
                 jogar(view.getPainelA(), view.getPainelB());
             } catch (IOException ex) {
+                System.err.println("erro: " + ex);
+            } catch (InterruptedException ex) {
                 System.err.println("erro: " + ex);
             }
         });
@@ -134,7 +136,7 @@ public class ChoosePresenter {
         });
     }
 
-    void jogar(JScrollPane paneA, JScrollPane paneB) throws IOException {
+    void jogar(JScrollPane paneA, JScrollPane paneB) throws IOException, InterruptedException {
 
         for (Component component : paneA.getComponents()) {
 

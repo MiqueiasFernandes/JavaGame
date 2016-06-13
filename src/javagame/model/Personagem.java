@@ -127,7 +127,7 @@ public class Personagem extends AbstractParticipante implements IComponente {
     }
 
     void mostrap(Graphics graphics) {
-        graphics.fillRect(getX(true), point.y, 10, 10);
+        //  graphics.fillRect(getX(true), point.y, 10, 10);
     }
 
     @Override
@@ -159,12 +159,11 @@ public class Personagem extends AbstractParticipante implements IComponente {
     @Override
     public void computaPrejuizo(Personagem de, Personagem para) {
 
-      //  System.out.println("esta encostando " + estaEncostando(para) + " vida " + vida + " prej " + estrategia.calculaPrejuizo());
-
+        //  System.out.println("esta encostando " + estaEncostando(para) + " vida " + vida + " prej " + estrategia.calculaPrejuizo());
         if (de == this) {
             return;
         }
-        if (estaEncostando(de /* ESTE É O OUTRO PERSONAGEM */ )) {
+        if (estaEncostando(de /* ESTE É O OUTRO PERSONAGEM */)) {
             vida -= estrategia.calculaPrejuizo();
         }
     }

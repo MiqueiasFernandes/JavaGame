@@ -15,7 +15,7 @@ import javagame.model.Personagem;
  */
 public abstract class AbstractTratador {
 
-    AbstractTratador proximo = null;
+    private AbstractTratador proximo = null;
 
     public void setProximo(AbstractTratador proximo) {
         if (this.proximo == null) {

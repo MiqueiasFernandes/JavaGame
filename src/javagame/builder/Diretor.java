@@ -7,7 +7,7 @@ package javagame.builder;
 
 import java.io.IOException;
 import javagame.decorador.IComponente;
-import javagame.mediador.Mediador;
+import javagame.mediador.IMediador;
 import javagame.model.Personagem_Enum;
 
 /**
@@ -16,10 +16,10 @@ import javagame.model.Personagem_Enum;
  */
 public class Diretor {
 
-    Builder builder;
-    Mediador mediador;
+    private Builder builder;
+    private IMediador mediador;
 
-    public Diretor(Builder builder, Mediador mediador) {
+    public Diretor(Builder builder, IMediador mediador) {
         this.builder = builder;
         this.mediador = mediador;
     }

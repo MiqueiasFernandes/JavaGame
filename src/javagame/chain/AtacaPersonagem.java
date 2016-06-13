@@ -28,7 +28,6 @@ public class AtacaPersonagem extends AbstractTratador {
         Personagem personagem = getPersonagemBasedLeter(mediador, e,
                 Personagem_Enum.KEY_PERSONAGEM_A_ATAQUE);
 
-        ////mudar estrategia
         personagem.setEstrategia(new Agredindo(mediador.getComponenteBasedOnPersonagem(personagem)));
 
         mediador.setAtaque(personagem, mediador.getOutroPersonagem(personagem));

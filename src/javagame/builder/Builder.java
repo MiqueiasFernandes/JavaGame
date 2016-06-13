@@ -8,7 +8,7 @@ package javagame.builder;
 import java.io.IOException;
 import javagame.decorador.Corpo;
 import javagame.decorador.IComponente;
-import javagame.mediador.Mediador;
+import javagame.mediador.IMediador;
 import javagame.model.Personagem;
 import javagame.model.Personagem_Enum;
 
@@ -21,7 +21,7 @@ public abstract class Builder {
     protected IComponente componente;
     protected Personagem personagem;
 
-    public void criaPersonagem(Mediador mediator, String nome, String _personagem, Personagem_Enum.Lado lado) throws IOException {
+    public void criaPersonagem(IMediador mediator, String nome, String _personagem, Personagem_Enum.Lado lado) throws IOException {
 
         personagem = new Personagem(mediator, nome, _personagem, lado);
 

@@ -9,11 +9,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.MediaTracker;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import javagame.mediador.Placar;
 import javagame.model.Personagem;
 import javagame.model.Personagem_Enum;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -23,20 +23,18 @@ import javax.swing.JPanel;
  */
 public class Cenario extends JPanel {
 
-    Image background;
-    RingView ringView;
-    Personagem personagemA, personagemB;
-    Placar placar;
-    MediaTracker media;
-    int id = 0;
-    boolean freeze = false;
-    BufferedImage imageFrozen;
+    private Image background;
+    private Personagem personagemA, personagemB;
+    private Placar placar;
+    private MediaTracker media;
+    private int id = 0;
+    private boolean freeze = false;
+    private BufferedImage imageFrozen;
 
-    public Cenario(Image background, RingView ringView, Personagem a, Personagem b, Placar placar) {
+    public Cenario(Image background, RingView ringView, Personagem a, Personagem b, Placar placar) throws InterruptedException {
         this.personagemA = a;
         this.personagemB = b;
         this.background = background;
-        this.ringView = ringView;
         this.placar = placar;
         setBackground(Color.WHITE);
         setBounds(ringView.getBounds());
@@ -45,11 +43,7 @@ public class Cenario extends JPanel {
 
         media = new MediaTracker(this);
         media.addImage(background, 0);
-
-        try {
-            media.waitForID(0);
-        } catch (Exception e) {
-        }
+        media.waitForID(0);
 
         this.setDoubleBuffered(true);
         imageFrozen = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
@@ -60,11 +54,11 @@ public class Cenario extends JPanel {
         view.getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(this, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                .addComponent(this, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(this, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+                .addComponent(this, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
         );
         view.pack();
     }
@@ -76,19 +70,16 @@ public class Cenario extends JPanel {
     }
 
     public void freeze() {
-
         if (!freeze) {
             Graphics g = imageFrozen.createGraphics();
             paint(g);
             g.setColor(new Color(0, 0, 0, 100));
-            g.fillRect(0, 0, getWidth(), getHeight());
+            g.fillRect(0, 0, imageFrozen.getWidth(), imageFrozen.getHeight());
             String img = (Personagem_Enum.cenarios_path + "gameover.png");
-            Image im = Toolkit.getDefaultToolkit().getImage(img);
+            Image im = new ImageIcon(img).getImage();
             if (im != null) {
-                g.drawImage(im, 0, 0, getWidth(), getHeight(), this);
+                g.drawImage(im, 0, 0, imageFrozen.getWidth(), imageFrozen.getHeight(), this);
             }
-            g.setColor(Color.red);
-            g.drawString("game over!", 0, 0);
             freeze = true;
         }
     }

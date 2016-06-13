@@ -8,7 +8,6 @@ package javagame.estrategia;
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
 import javagame.decorador.IComponente;
-import javagame.model.Personagem;
 
 public class Recuando extends Estrategia {
 

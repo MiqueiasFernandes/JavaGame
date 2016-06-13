@@ -16,16 +16,6 @@ public class Personagem_Enum {
         DIREITA
     }
 
-    public enum Acao {
-        AVANCAR,
-        RECUAR,
-        SALTAR,
-        ABAIXAR,
-        DEFENDER,
-        ATACAR,
-        IMOVEL
-    }
-
     public enum Posicao {
         LEVANTADO,
         ABAIXADO,

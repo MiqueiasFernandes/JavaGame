@@ -8,7 +8,6 @@ package javagame.estrategia;
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
 import javagame.decorador.IComponente;
-import javagame.model.Personagem;
 
 /**
  *
@@ -16,7 +15,7 @@ import javagame.model.Personagem;
  */
 public abstract class Estrategia {
 
-    IComponente componente;
+    protected IComponente componente;
 
     public Estrategia(IComponente componente) {
         this.componente = componente;

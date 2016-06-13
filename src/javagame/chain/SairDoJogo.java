@@ -18,9 +18,7 @@ public class SairDoJogo extends AbstractTratador {
 
     @Override
     public boolean tratar(KeyEvent e, IMediador mediador) {
-
         mediador.gameOver(Personagem_Enum.ModoGameOver.DESISTENCIA);
-
         return true;
     }
 

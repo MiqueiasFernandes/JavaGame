@@ -50,19 +50,15 @@ public abstract class AbstractDecorador implements IComponente {
         if (personagem.getLado() == Personagem_Enum.Lado.ESQUERDA) {
             return g;
         }
-
         g = g.create();
         int w = personagem.getMediador().getCenario().getWidth();
         Graphics2D e = (Graphics2D) g;
-
         AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
         tx.translate(-w
                 - personagem.getX(), 0);
         e.setTransform(tx);
         e.translate(w - personagem.getX(), 0);
-
         return g;
-
     }
 
 }

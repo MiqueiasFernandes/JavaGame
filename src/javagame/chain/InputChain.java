@@ -15,8 +15,8 @@ import javagame.mediador.IMediador;
  */
 public class InputChain {
 
-    AbstractTratador primeiro;
-    IMediador mediador;
+    private AbstractTratador primeiro;
+    private IMediador mediador;
 
     public InputChain(AbstractTratador primeiro, IMediador mediador) {
         this.primeiro = primeiro;

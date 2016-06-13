@@ -27,9 +27,8 @@ public class AvancaPersonagem extends AbstractTratador {
     public boolean tratar(KeyEvent e, IMediador mediador) {
         Personagem personagem = getPersonagemBasedLeter(mediador, e, Personagem_Enum.KEY_PERSONAGEM_A_AVANCA);
 
-        ///mudar estrategia
         personagem.setEstrategia(new Avancando(mediador.getComponenteBasedOnPersonagem(personagem)));
-        ////avancar em x
+
         if (personagem.getLado() == Personagem_Enum.Lado.ESQUERDA) {
             personagem.setX(personagem.getX() + 10);
         } else {
