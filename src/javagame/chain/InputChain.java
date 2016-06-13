@@ -28,7 +28,7 @@ public class InputChain {
     }
 
     public boolean tratar(KeyEvent e) {
-        System.out.println("tratando: " + e.getKeyChar());
+       // System.out.println("tratando: " + e.getKeyChar());
         return primeiro.verificar(e, mediador);
     }
 
