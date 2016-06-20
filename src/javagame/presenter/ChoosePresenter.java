@@ -111,7 +111,7 @@ public class ChoosePresenter {
                     button.setVisible(true);
                 }
             }
-
+            view.pack();
         }
     }
 
@@ -120,7 +120,6 @@ public class ChoosePresenter {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 for (Component component : pane.getComponents()) {
 
                     if (component instanceof JToggleButton) {
@@ -133,7 +132,6 @@ public class ChoosePresenter {
                         btn.repaint();
                     }
                 }
-
             }
         });
     }
