@@ -6,11 +6,7 @@
 package javagame.mediador;
 
 import java.awt.Image;
-import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import javagame.builder.Builder;
@@ -25,7 +21,6 @@ import javagame.presenter.ChoosePresenter;
 import javagame.view.Cenario;
 import javagame.view.RingView;
 import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
 
 /**
  *
@@ -40,7 +35,7 @@ public class Mediador implements IMediador {
     private RingView ringView;
     private ArrayList<AbstractParticipante> participantes;
 
-    public Mediador(String nome_personagem_A, String nome_personagem_B) {
+    public Mediador(String nome_personagem_A, String nome_personagem_B) throws IOException {
         this.nome_personagem_A = nome_personagem_A;
         this.nome_personagem_B = nome_personagem_B;
         participantes = new ArrayList<>();
