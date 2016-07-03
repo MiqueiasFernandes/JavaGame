@@ -8,6 +8,7 @@ package javagame.presenter;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
@@ -81,7 +82,8 @@ public class ChoosePresenter {
         view.setTitle("Escolha os personagens e o cenário do jogo");
         view.setState(JFrame.MAXIMIZED_BOTH);
         view.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        view.getPainelDeFundo().setImage(ImageIO.read(new File(Personagem_Enum.cenarios_path + "suspense.gif")));
+        view.getPainelDeFundo().setImage(backGround = Toolkit.getDefaultToolkit()
+                .getImage((Personagem_Enum.cenarios_path + "suspense.gif")));
         view.setVisible(true);
     }
 
@@ -116,7 +118,6 @@ public class ChoosePresenter {
     }
 
     void popularPainel(JPanel panel) {
-
         String personagens[] = new File(Personagem_Enum.personagens_path).list();
         Rectangle rectangle = null;
         if (personagens != null) {
@@ -149,10 +150,11 @@ public class ChoosePresenter {
                     button.setBounds(rectangle);
                     addActionButon(button, panel);
                     panel.add(button);
-                    button.setBackground(Color.WHITE);
                     /*para setOpaque funcionar*/
+                    button.setBackground(Color.WHITE);
                     button.setBorderPainted(false);
-                    button.setFont(view.getCenarioLbl().getFont());
+                    Font font = view.getCenarioLbl().getFont();
+                    button.setFont(new Font(font.getName(), font.getStyle(), 18));
                     button.setCursor(new Cursor(Cursor.HAND_CURSOR));
                     button.setOpaque(false);
                     button.setVisible(true);

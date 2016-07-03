@@ -5,6 +5,8 @@
  */
 package javagame.model;
 
+import java.awt.event.KeyEvent;
+
 /**
  *
  * @author mfernandes
@@ -43,6 +45,7 @@ public class Personagem_Enum {
     public static final char KEY_PERSONAGEM_B_DEFESA = 'm';
 
     public static final char KEY_SAIR_DO_JOGO = 'q';
+    public static final char KEY_SAIR_AJUDA = KeyEvent.VK_ESCAPE;
 
     static public boolean pertence_A(char k) {
 

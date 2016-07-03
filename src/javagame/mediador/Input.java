@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import javagame.chain.AtacaPersonagem;
 import javagame.chain.AvancaPersonagem;
 import javagame.chain.DefendePersonagem;
+import javagame.chain.FecharHelp;
 import javagame.chain.InputChain;
 import javagame.chain.Ociosopersonagem;
 import javagame.chain.RecuaPersonagem;
@@ -37,6 +38,7 @@ public class Input extends AbstractParticipante {
         inputChain.addTratador(new RecuaPersonagem());
         inputChain.addTratador(new AtacaPersonagem());
         inputChain.addTratador(new DefendePersonagem());
+        inputChain.addTratador(new FecharHelp());
         inputChain.addTratador(new SairDoJogo());
 
         RingView ringView = mediador.getRingView();

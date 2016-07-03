@@ -116,4 +116,8 @@ public class Cenario extends JPanel {
 
     }
 
+    public Placar getPlacar() {
+        return placar;
+    }
+
 }

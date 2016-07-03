@@ -170,4 +170,8 @@ public class Placar extends AbstractParticipante {
         }
     }
 
+    public void setShowHelp(boolean showHelp) {
+        this.showHelp = showHelp;
+    }
+
 }
