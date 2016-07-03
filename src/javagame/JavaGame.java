@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javagame.mediador.Mediador;
 import javagame.model.Personagem_Enum;
 import javagame.view.MainView;
@@ -38,7 +40,7 @@ public class JavaGame {
             sequencer.open();
             sequencer.setSequence(sequence);
             sequencer.setLoopCount(1000);
-           sequencer.start();
+            sequencer.start();
         } catch (MalformedURLException e) {
             System.err.println("erro ao executar som: " + e);
         } catch (IOException e) {
@@ -50,8 +52,12 @@ public class JavaGame {
         mainView.getJogarBtn().addActionListener((ActionEvent e) -> {
             mainView.setVisible(false);
 
-            new Mediador(mainView.getNomeATxt().getText(),
-                    mainView.getNomeBTxt().getText());
+            try {
+                new Mediador(mainView.getNomeATxt().getText(),
+                        mainView.getNomeBTxt().getText());
+            } catch (IOException ex) {
+                System.err.println("erro ao carregar audio: " + e);
+            }
         });
 
         mainView.setTitle("Insira o nome dos jogadores");
