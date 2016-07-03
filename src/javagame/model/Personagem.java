@@ -7,6 +7,7 @@ package javagame.model;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.MouseEvent;
 import java.awt.image.ImageObserver;
 import java.io.FileReader;
 import java.io.IOException;
@@ -47,6 +48,10 @@ public class Personagem extends AbstractParticipante implements IComponente {
 
     public Properties getCaracteristicas() {
         return caracteristicas;
+    }
+
+    public ImageIcon getIcon() {
+        return this.icon;
     }
 
     public void setCaracteristicas(Properties caracteristicas) {
@@ -178,6 +183,11 @@ public class Personagem extends AbstractParticipante implements IComponente {
 
     public int getVida() {
         return this.vida;
+    }
+
+    @Override
+    public void mouseEvent(MouseEvent e) {
+
     }
 
 }

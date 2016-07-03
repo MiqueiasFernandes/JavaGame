@@ -22,31 +22,31 @@ public class Luva extends AbstractDecorador {
  @Override
     public void ocioso(Graphics graphics, ImageObserver imageObserver) {
         decorado.ocioso(graphics, imageObserver);
-        pintarImagem(ocioso, imageObserver, graphics);
+        pintarImagem(ocioso, imageObserver, graphics, false);
     }
 
     @Override
     public void agredindo(Graphics graphics, ImageObserver imageObserver) {
         decorado.agredindo(graphics, imageObserver);
-        pintarImagem(agredindo, imageObserver, graphics);
+        pintarImagem(agredindo, imageObserver, graphics, false);
     }
 
     @Override
     public void defendendo(Graphics graphics, ImageObserver imageObserver) {
         decorado.defendendo(graphics, imageObserver);
-        pintarImagem(defendendo, imageObserver, graphics);
+        pintarImagem(defendendo, imageObserver, graphics, false);
     }
 
     @Override
     public void avancando(Graphics graphics, ImageObserver imageObserver) {
         decorado.avancando(graphics, imageObserver);
-        pintarImagem(avancando, imageObserver, graphics);
+        pintarImagem(avancando, imageObserver, graphics, false);
     }
 
     @Override
     public void recuando(Graphics graphics, ImageObserver imageObserver) {
         decorado.recuando(graphics, imageObserver);
-        pintarImagem(recuando, imageObserver, graphics);
+        pintarImagem(recuando, imageObserver, graphics, false);
     }
 
 }

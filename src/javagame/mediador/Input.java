@@ -8,6 +8,8 @@ package javagame.mediador;
 import java.awt.Component;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javagame.chain.AtacaPersonagem;
 import javagame.chain.AvancaPersonagem;
 import javagame.chain.DefendePersonagem;
@@ -71,7 +73,15 @@ public class Input extends AbstractParticipante {
                     e.setKeyChar(Personagem_Enum.KEY_PERSONAGEM_B_OCIOSO);
                 }
                 inputChain.tratar(e);
+            }
 
+        });
+
+        component.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                mediador.mouseEvent(e);
             }
 
         });
@@ -92,6 +102,11 @@ public class Input extends AbstractParticipante {
         if (mediador.getPersonagemB().getVida() <= 0 && mediador.getPersonagemA().getVida() <= 0) {
             mediador.gameOver(Personagem_Enum.ModoGameOver.EMPATOU);
         }
+
+    }
+
+    @Override
+    public void mouseEvent(MouseEvent e) {
 
     }
 

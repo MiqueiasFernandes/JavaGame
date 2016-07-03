@@ -6,9 +6,18 @@
 package javagame;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import javagame.mediador.Mediador;
+import javagame.model.Personagem_Enum;
 import javagame.view.MainView;
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.MidiUnavailableException;
+import javax.sound.midi.Sequence;
+import javax.sound.midi.Sequencer;
+import javax.swing.JFrame;
 
 /**
  *
@@ -20,23 +29,35 @@ public class JavaGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-     
+
         MainView mainView = new MainView();
 
-        mainView.getJogarBtn().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        try {
+            Sequence sequence = MidiSystem.getSequence(new File(Personagem_Enum.sounds_path + "onestop.mid"));
+            Sequencer sequencer = MidiSystem.getSequencer();
+            sequencer.open();
+            sequencer.setSequence(sequence);
+            sequencer.setLoopCount(1000);
+           sequencer.start();
+        } catch (MalformedURLException e) {
+            System.err.println("erro ao executar som: " + e);
+        } catch (IOException e) {
+            System.err.println("erro ao executar som: " + e);
+        } catch (MidiUnavailableException | InvalidMidiDataException e) {
+            System.err.println("erro ao executar som: " + e);
+        }
 
-                mainView.setVisible(false);
+        mainView.getJogarBtn().addActionListener((ActionEvent e) -> {
+            mainView.setVisible(false);
 
-                new Mediador(mainView.getNomeATxt().getText(),
-                        mainView.getNomeBTxt().getText());
-
-            }
+            new Mediador(mainView.getNomeATxt().getText(),
+                    mainView.getNomeBTxt().getText());
         });
 
         mainView.setTitle("Insira o nome dos jogadores");
-        
+        mainView.setLocationRelativeTo(null);
+        mainView.setState(JFrame.MAXIMIZED_BOTH);
+        mainView.setExtendedState(JFrame.MAXIMIZED_BOTH);
         mainView.setVisible(true);
 
     }

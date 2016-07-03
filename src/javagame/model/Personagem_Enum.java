@@ -66,5 +66,6 @@ public class Personagem_Enum {
 
     static public String personagens_path = "data/personagens/";
     static public String cenarios_path = "data/cenarios/";
+    static public String sounds_path = "data/sons/";
 
 }

@@ -5,6 +5,8 @@
  */
 package javagame.mediador;
 
+import java.awt.Point;
+import java.awt.event.MouseEvent;
 import javagame.decorador.IComponente;
 import javagame.model.Personagem;
 import javagame.model.Personagem_Enum;
@@ -36,5 +38,7 @@ public interface IMediador {
     public void setAtaque(Personagem de, Personagem para);
 
     public void gameOver(Personagem_Enum.ModoGameOver modo);
+
+    public void mouseEvent(MouseEvent e);
 
 }

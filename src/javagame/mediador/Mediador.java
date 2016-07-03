@@ -6,7 +6,11 @@
 package javagame.mediador;
 
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import javagame.builder.Builder;
@@ -20,6 +24,8 @@ import javagame.model.Personagem_Enum;
 import javagame.presenter.ChoosePresenter;
 import javagame.view.Cenario;
 import javagame.view.RingView;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 
 /**
  *
@@ -41,7 +47,7 @@ public class Mediador implements IMediador {
         new ChoosePresenter(nome_personagem_A, nome_personagem_B, this);
     }
 
-    public void inicializar(String personagem_a, String personagem_b, String b_cenario) throws IOException, InterruptedException {
+    public void inicializar(String personagem_a, String personagem_b, Image background) throws IOException, InterruptedException, JavaLayerException {
         Builder buildA = getBuilderBasedOnName(personagem_a);
         Builder buildB = getBuilderBasedOnName(personagem_b);
 
@@ -55,12 +61,8 @@ public class Mediador implements IMediador {
 
         ringView = new RingView();
 
-        Image im = null;
-        String background = (Personagem_Enum.cenarios_path + b_cenario);
-        im = Toolkit.getDefaultToolkit().getImage(background);
-
         Placar placar = new Placar(this);
-        cenario = new Cenario(im, ringView, personagem_A, personagem_B, placar);
+        cenario = new Cenario(background, ringView, personagem_A, personagem_B, placar);
 
         personagem_A.setEstrategia(new Ocioso(componenteA));
         personagem_B.setEstrategia(new Ocioso(componenteB));
@@ -69,10 +71,14 @@ public class Mediador implements IMediador {
 
         Input input = new Input(this);
 
+        participantes.add(new EfeitosAcusticos(this));
         participantes.add(personagem_A);
         participantes.add(personagem_B);
         participantes.add(placar);
         participantes.add(input);
+
+        personagem_B.setX(cenario.getWidth());
+        personagem_A.setX(cenario.getWidth() / 3);
 
         ringView.setTitle("JavaGame - " + personagem_A.getNome() + " X " + personagem_B.getNome());
     }
@@ -158,6 +164,26 @@ public class Mediador implements IMediador {
         System.out.println("pontos B (" + personagem_B.getNome() + "): " + personagem_B.getVida());
 
         cenario.freeze();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    System.err.print("Erro ao esperar por terminar " + ex);
+                }
+                System.exit(0);
+            }
+        }).start();
+
+    }
+
+    @Override
+    public void mouseEvent(MouseEvent e) {
+        for (AbstractParticipante participante : participantes) {
+            participante.mouseEvent(e);
+        }
     }
 
 }

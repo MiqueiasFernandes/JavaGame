@@ -5,6 +5,7 @@
  */
 package javagame.mediador;
 
+import java.awt.event.MouseEvent;
 import javagame.model.Personagem;
 
 /**
@@ -24,5 +25,7 @@ public abstract class AbstractParticipante {
     }
 
     public abstract void computaPrejuizo(Personagem de, Personagem para);
+
+    public abstract void mouseEvent(MouseEvent e);
 
 }

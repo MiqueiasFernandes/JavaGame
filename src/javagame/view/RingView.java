@@ -5,6 +5,8 @@
  */
 package javagame.view;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author mfernandes
@@ -16,6 +18,8 @@ public class RingView extends javax.swing.JFrame {
      */
     public RingView() {
         initComponents();
+        this.setState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -30,21 +34,26 @@ public class RingView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaGame");
+        setBackground(new java.awt.Color(0, 0, 0));
+        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1000, 600));
+        setResizable(false);
         setSize(new java.awt.Dimension(1000, 600));
+        setType(java.awt.Window.Type.UTILITY);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(0, 800, Short.MAX_VALUE)
                 .addComponent(jLabel1))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 417, Short.MAX_VALUE)
+                .addContainerGap(417, Short.MAX_VALUE)
                 .addComponent(jLabel1))
         );
 

@@ -5,6 +5,10 @@
  */
 package javagame.view;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javagame.model.Personagem_Enum;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -14,10 +18,14 @@ import javax.swing.JTextField;
  */
 public class MainView extends javax.swing.JFrame {
 
+    Image fundo;
+
     /**
      * Creates new form MainView
      */
     public MainView() {
+        fundo = Toolkit.getDefaultToolkit()
+                .getImage(Personagem_Enum.cenarios_path + "fundo.jpg");
         initComponents();
     }
 
@@ -30,6 +38,7 @@ public class MainView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelBase = new PaintPanel(fundo);
         jogarBtn = new javax.swing.JButton();
         nomeATxt = new javax.swing.JTextField();
         nomeBTxt = new javax.swing.JTextField();
@@ -38,10 +47,21 @@ public class MainView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("DIGITE OS NOMES");
+        setAlwaysOnTop(true);
+        setBackground(java.awt.SystemColor.activeCaptionText);
+        setUndecorated(true);
         setResizable(false);
 
-        jogarBtn.setText("JOGAR!");
+        panelBase.setBackground(new java.awt.Color(0, 0, 0));
+        panelBase.setBorder(null);
+        panelBase.setForeground(new java.awt.Color(254, 254, 254));
 
+        jogarBtn.setIcon(new javax.swing.ImageIcon("/home/mfernandes/NetBeansProjects/javaGame/data/cenarios/botao-jogar.png")); // NOI18N
+        jogarBtn.setBorder(null);
+        jogarBtn.setBorderPainted(false);
+
+        nomeATxt.setFont(new java.awt.Font("DejaVu Sans", 1, 48)); // NOI18N
         nomeATxt.setText("nome");
         nomeATxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -49,58 +69,75 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
+        nomeBTxt.setFont(new java.awt.Font("DejaVu Sans", 1, 48)); // NOI18N
         nomeBTxt.setText("nome");
 
+        jLabel1.setBackground(new java.awt.Color(1, 1, 1));
+        jLabel1.setFont(new java.awt.Font("DejaVu Sans", 1, 48)); // NOI18N
+        jLabel1.setForeground(java.awt.Color.yellow);
         jLabel1.setText("Nome A:");
 
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("DejaVu Sans", 1, 48)); // NOI18N
+        jLabel2.setForeground(java.awt.Color.blue);
         jLabel2.setText("Nome B:");
 
+        jLabel3.setBackground(new java.awt.Color(1, 1, 1));
+        jLabel3.setFont(new java.awt.Font("DejaVu Sans", 1, 48)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(254, 254, 254));
         jLabel3.setText("DIGITE O NOME DOS PARTICIPANTES");
+
+        javax.swing.GroupLayout panelBaseLayout = new javax.swing.GroupLayout(panelBase);
+        panelBase.setLayout(panelBaseLayout);
+        panelBaseLayout.setHorizontalGroup(
+            panelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBaseLayout.createSequentialGroup()
+                .addGroup(panelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBaseLayout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jLabel3))
+                    .addGroup(panelBaseLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(panelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nomeATxt)
+                            .addComponent(nomeBTxt))))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBaseLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jogarBtn)
+                .addGap(350, 350, 350))
+        );
+        panelBaseLayout.setVerticalGroup(
+            panelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBaseLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(jLabel3)
+                .addGap(28, 28, 28)
+                .addGroup(panelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nomeATxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addGroup(panelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nomeBTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(137, 137, 137)
+                .addComponent(jogarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(38, 38, 38)
-                                .addComponent(jLabel1)
-                                .addGap(26, 26, 26))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nomeATxt, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-                            .addComponent(nomeBTxt)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(jLabel3)))
-                .addContainerGap(58, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jogarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(151, 151, 151))
+            .addComponent(panelBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeATxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeBTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jogarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+            .addComponent(panelBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -122,6 +159,12 @@ public class MainView extends javax.swing.JFrame {
         return nomeBTxt;
     }
 
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        jogarBtn.setBounds(getWidth() / 2 - (getWidth() / 8), jogarBtn.getY(), getWidth() / 4, jogarBtn.getHeight());
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -130,5 +173,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton jogarBtn;
     private javax.swing.JTextField nomeATxt;
     private javax.swing.JTextField nomeBTxt;
+    private javax.swing.JPanel panelBase;
     // End of variables declaration//GEN-END:variables
 }
+

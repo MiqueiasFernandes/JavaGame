@@ -62,9 +62,11 @@ public abstract class AbstractDecorador implements IComponente {
         return g;
     }
 
-    public void pintarImagem(Image imagem, ImageObserver imageObserver, Graphics graphics) {
+    public void pintarImagem(Image imagem, ImageObserver imageObserver, Graphics graphics, boolean transladar) {
         if (imagem != null) {
-            graphics.translate(personagem.getX(), 0);
+            if (transladar) {
+                graphics.translate(personagem.getX(), 0);
+            }
             getOrientedGraphics(graphics).drawImage(imagem,
                     personagem.getLado() == Personagem_Enum.Lado.DIREITA ? personagem.getX() : 0,
                     personagem.getY(), imageObserver);

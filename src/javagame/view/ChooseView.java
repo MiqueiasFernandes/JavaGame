@@ -5,9 +5,12 @@
  */
 package javagame.view;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+import javagame.model.Personagem_Enum;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -15,10 +18,18 @@ import javax.swing.JScrollPane;
  */
 public class ChooseView extends javax.swing.JFrame {
 
+    private final Image image, imagePanel, imagePanelB;
+
     /**
      * Creates new form ChooseView
      */
     public ChooseView() {
+        image = Toolkit.getDefaultToolkit()
+                .getImage(Personagem_Enum.cenarios_path + "fundo.jpg");
+        imagePanel = Toolkit.getDefaultToolkit()
+                .getImage(Personagem_Enum.cenarios_path + "fundo-panel-a.png");
+        imagePanelB = Toolkit.getDefaultToolkit()
+                .getImage(Personagem_Enum.cenarios_path + "fundo-panel-b.png");
         initComponents();
     }
 
@@ -31,67 +42,101 @@ public class ChooseView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        painelA = new javax.swing.JScrollPane();
+        panelFundo = new PaintPanel(image);
         cenarioLbl = new javax.swing.JLabel();
-        painelB = new javax.swing.JScrollPane();
-        goBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        goBtn = new javax.swing.JButton();
+        panelA = new PaintPanel(imagePanel);
+        panelB = new PaintPanel(imagePanelB);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setUndecorated(true);
 
-        painelA.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        panelFundo.setBackground(new java.awt.Color(1, 1, 1));
 
+        cenarioLbl.setFont(new java.awt.Font("DejaVu Sans", 1, 48)); // NOI18N
+        cenarioLbl.setForeground(new java.awt.Color(254, 254, 254));
         cenarioLbl.setText("CLIQUE PARA SELELCIONAR O CENARIO");
 
-        painelB.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        goBtn.setText("GO");
-
+        jLabel1.setFont(new java.awt.Font("DejaVu Sans", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setText("SELECIONE SEU PERSONAGEM FAVORITO");
 
-        jLabel2.setText("CLIQUE NOS BOTOES OCULTOS");
+        goBtn.setIcon(new javax.swing.ImageIcon("/home/mfernandes/NetBeansProjects/javaGame/data/cenarios/botao-bora.png")); // NOI18N
+
+        panelA.setOpaque(false);
+
+        javax.swing.GroupLayout panelALayout = new javax.swing.GroupLayout(panelA);
+        panelA.setLayout(panelALayout);
+        panelALayout.setHorizontalGroup(
+            panelALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 530, Short.MAX_VALUE)
+        );
+        panelALayout.setVerticalGroup(
+            panelALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        panelB.setOpaque(false);
+
+        javax.swing.GroupLayout panelBLayout = new javax.swing.GroupLayout(panelB);
+        panelB.setLayout(panelBLayout);
+        panelBLayout.setHorizontalGroup(
+            panelBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 540, Short.MAX_VALUE)
+        );
+        panelBLayout.setVerticalGroup(
+            panelBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 337, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout panelFundoLayout = new javax.swing.GroupLayout(panelFundo);
+        panelFundo.setLayout(panelFundoLayout);
+        panelFundoLayout.setHorizontalGroup(
+            panelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFundoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cenarioLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(682, 682, 682))
+            .addGroup(panelFundoLayout.createSequentialGroup()
+                .addGroup(panelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelFundoLayout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel1))
+                    .addGroup(panelFundoLayout.createSequentialGroup()
+                        .addGap(202, 202, 202)
+                        .addComponent(goBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFundoLayout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(panelA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panelB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelFundoLayout.setVerticalGroup(
+            panelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFundoLayout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(81, 81, 81)
+                .addGroup(panelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(goBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cenarioLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(painelA, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(painelB, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(goBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
-            .addComponent(cenarioLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelFundo, javax.swing.GroupLayout.PREFERRED_SIZE, 1276, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(4, 4, 4)
-                .addComponent(jLabel2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(painelB, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-                            .addComponent(painelA)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(goBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cenarioLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
+            .addComponent(panelFundo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -101,16 +146,20 @@ public class ChooseView extends javax.swing.JFrame {
         return goBtn;
     }
 
-    public JScrollPane getPainelA() {
-        return painelA;
+    public JPanel getPainelA() {
+        return panelA;
     }
 
-    public JScrollPane getPainelB() {
-        return painelB;
+    public JPanel getPainelB() {
+        return panelB;
     }
 
     public JLabel getCenarioLbl() {
         return cenarioLbl;
+    }
+
+    public PaintPanel getPainelDeFundo() {
+        return (PaintPanel) panelFundo;
     }
 
 
@@ -118,8 +167,8 @@ public class ChooseView extends javax.swing.JFrame {
     private javax.swing.JLabel cenarioLbl;
     private javax.swing.JButton goBtn;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane painelA;
-    private javax.swing.JScrollPane painelB;
+    private javax.swing.JPanel panelA;
+    private javax.swing.JPanel panelB;
+    private javax.swing.JPanel panelFundo;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,7 +8,9 @@ package javagame.mediador;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javagame.model.Personagem;
@@ -23,12 +25,19 @@ public class Placar extends AbstractParticipante {
 
     private int tempo = 100;
     private Color va = Color.cyan, vb = Color.GREEN, tp = Color.DARK_GRAY;
-    private Image img_placar;
+    private final Image img_placar, help, ajuda;
+    private int tamHelp = 30;
+    private Rectangle helpTangle;
+    private boolean showHelp = false;
 
     public Placar(IMediador mediador) {
         super(mediador);
-        String nome_perso = (Personagem_Enum.cenarios_path + "score.png");
-        img_placar = Toolkit.getDefaultToolkit().getImage(nome_perso);
+        String placar = (Personagem_Enum.cenarios_path + "score.png");
+        String _help = (Personagem_Enum.cenarios_path + "help.png");
+        String _ajuda = (Personagem_Enum.cenarios_path + "ajuda.png");
+        img_placar = Toolkit.getDefaultToolkit().getImage(placar);
+        help = Toolkit.getDefaultToolkit().getImage(_help);
+        ajuda = Toolkit.getDefaultToolkit().getImage(_ajuda);
 
         new Thread(() -> {
 
@@ -52,13 +61,6 @@ public class Placar extends AbstractParticipante {
 
     public void pintar(Graphics g, Cenario cenario) {
 
-//        setTempo((tempo % 100) + 1);
-//        setVidaA((vidaA % 100) + 1);
-//        setVidaB( (vidaB % 100) + 1);
-//        setTempo(tempo-=1);
-//        setVidaA(vidaA-=1);
-//        setVidaB(vidaB-=1);
-        ///imagem principal
         int x = cenario.getWidth() / 2 - ((cenario.getWidth() / 3) / 2);
         int y = cenario.getHeight() / 50;
         int w = cenario.getWidth() / 3;
@@ -87,6 +89,13 @@ public class Placar extends AbstractParticipante {
                 ((w / 3) * getVidaB()) / (100),
                 h / 30);
         g.drawString(mediador.getPersonagemB().getNome(), x + (w / 2) + (w / 5), (y + (h / 2) + (h / 13)));
+
+        helpTangle = new Rectangle(x + w, y, tamHelp, tamHelp);
+        g.drawImage(help, x + w, y, tamHelp, tamHelp, cenario);
+
+        if (showHelp) {
+            g.drawImage(ajuda, 0, 0, cenario.getWidth(), cenario.getHeight(), cenario);
+        }
     }
 
     public int getVidaA() {
@@ -145,6 +154,20 @@ public class Placar extends AbstractParticipante {
     public void computaPrejuizo(Personagem de, Personagem para) {
         setVidaA(mediador.getPersonagemA().getVida());
         setVidaB(mediador.getPersonagemB().getVida());
+    }
+
+    @Override
+    public void mouseEvent(MouseEvent e) {
+
+        if (e.getClickCount() < 1) {
+            if (helpTangle != null && helpTangle.contains(e.getPoint())) {
+                tamHelp = 45;
+            } else {
+                tamHelp = 30;
+            }
+        } else if (helpTangle != null && helpTangle.contains(e.getPoint())) {
+            showHelp = !showHelp;
+        }
     }
 
 }
