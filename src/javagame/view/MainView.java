@@ -24,12 +24,9 @@ public class MainView extends javax.swing.JFrame {
     /**
      * Creates new form MainView
      */
-    public MainView() {
-        fundo = Toolkit.getDefaultToolkit()
-                .getImage(Personagem_Enum.cenarios_path + "fundo.jpg");
+    public MainView(Image fundo) {
+        this.fundo = fundo;
         initComponents();
-        jogarBtn.setBackground(Color.red);
-        jogarBtn.setOpaque(false);
     }
 
     /**
@@ -161,13 +158,6 @@ public class MainView extends javax.swing.JFrame {
         return nomeBTxt;
     }
 
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        jogarBtn.setBounds(getWidth() / 2 - (getWidth() / 8), jogarBtn.getY(), getWidth() / 4, jogarBtn.getHeight());
-    }
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -178,4 +168,3 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel panelBase;
     // End of variables declaration//GEN-END:variables
 }
-

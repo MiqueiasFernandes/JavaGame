@@ -21,6 +21,7 @@ import javagame.model.Personagem_Enum;
 import javagame.presenter.ChoosePresenter;
 import javagame.view.Cenario;
 import javagame.view.RingView;
+import javax.swing.JFrame;
 import javazoom.jl.decoder.JavaLayerException;
 
 /**
@@ -63,6 +64,8 @@ public class Mediador implements IMediador {
         personagem_A.setEstrategia(new Ocioso(componenteA));
         personagem_B.setEstrategia(new Ocioso(componenteB));
 
+        ringView.setState(JFrame.MAXIMIZED_BOTH);
+        ringView.setExtendedState(JFrame.MAXIMIZED_BOTH);
         ringView.setVisible(true);
 
         Input input = new Input(this);

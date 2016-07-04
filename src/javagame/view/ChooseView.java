@@ -23,13 +23,11 @@ public class ChooseView extends javax.swing.JFrame {
     /**
      * Creates new form ChooseView
      */
-    public ChooseView() {
-        image = Toolkit.getDefaultToolkit()
-                .getImage(Personagem_Enum.cenarios_path + "fundo.jpg");
-        imagePanel = Toolkit.getDefaultToolkit()
-                .getImage(Personagem_Enum.cenarios_path + "fundo-panel-a.png");
-        imagePanelB = Toolkit.getDefaultToolkit()
-                .getImage(Personagem_Enum.cenarios_path + "fundo-panel-b.png");
+    public ChooseView(Image image, Image imagePanel, Image imagePanelB) {
+        this.image = image;
+        this.imagePanel = imagePanel;
+        this.imagePanelB = imagePanelB;
+
         initComponents();
     }
 

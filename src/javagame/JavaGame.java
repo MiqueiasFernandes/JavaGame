@@ -5,6 +5,9 @@
  */
 package javagame;
 
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +33,9 @@ public class JavaGame {
      */
     public static void main(String[] args) {
 
-        MainView mainView = new MainView();
+        Image fundo = Toolkit.getDefaultToolkit()
+                .getImage(Personagem_Enum.cenarios_path + "fundo.jpg");
+        MainView mainView = new MainView(fundo);
 
         try {
             Sequence sequence = MidiSystem.getSequence(new File(Personagem_Enum.sounds_path + "onestop.mid"));
@@ -62,6 +67,9 @@ public class JavaGame {
         mainView.setLocationRelativeTo(null);
         mainView.setState(JFrame.MAXIMIZED_BOTH);
         mainView.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        mainView.getJogarBtn().setBackground(Color.red);
+        mainView.getJogarBtn().setOpaque(false);
         mainView.setVisible(true);
 
     }

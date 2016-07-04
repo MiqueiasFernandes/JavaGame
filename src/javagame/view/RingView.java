@@ -5,8 +5,6 @@
  */
 package javagame.view;
 
-import javax.swing.JFrame;
-
 /**
  *
  * @author mfernandes
@@ -18,8 +16,6 @@ public class RingView extends javax.swing.JFrame {
      */
     public RingView() {
         initComponents();
-        this.setState(JFrame.MAXIMIZED_BOTH);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -30,8 +26,6 @@ public class RingView extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JavaGame");
@@ -46,15 +40,11 @@ public class RingView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 800, Short.MAX_VALUE)
-                .addComponent(jLabel1))
+            .addGap(0, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(417, Short.MAX_VALUE)
-                .addComponent(jLabel1))
+            .addGap(0, 417, Short.MAX_VALUE)
         );
 
         pack();
@@ -62,6 +52,5 @@ public class RingView extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

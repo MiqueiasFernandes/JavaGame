@@ -45,7 +45,14 @@ public class ChoosePresenter {
     public ChoosePresenter(String nomeA, String nomeB, Mediador mediador) throws IOException {
 
         this.mediador = mediador;
-        view = new ChooseView();
+        Image image = Toolkit.getDefaultToolkit()
+                .getImage(Personagem_Enum.cenarios_path + "fundo.jpg"),
+                imagePanel = Toolkit.getDefaultToolkit()
+                .getImage(Personagem_Enum.cenarios_path + "fundo-panel-a.png"),
+                imagePanelB = Toolkit.getDefaultToolkit()
+                .getImage(Personagem_Enum.cenarios_path + "fundo-panel-b.png");
+
+        view = new ChooseView(image, imagePanel, imagePanelB);
         view.getPainelA().setBorder(BorderFactory
                 .createTitledBorder(BorderFactory.createEmptyBorder(), nomeA.toUpperCase(),
                         TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION, view.getCenarioLbl().getFont(), Color.YELLOW));
