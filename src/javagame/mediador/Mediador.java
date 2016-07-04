@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javagame.builder.Builder;
 import javagame.builder.Diretor;
 import javagame.builder.King;
+import javagame.builder.King_Flame;
 import javagame.builder.King_especial;
 import javagame.decorador.IComponente;
 import javagame.estrategia.Ocioso;
@@ -86,6 +87,9 @@ public class Mediador implements IMediador {
         if ("king_especial".equalsIgnoreCase(tipo)) {
             return new King_especial();
         }
+        if ("king_flame".equalsIgnoreCase(tipo)) {
+            return new King_Flame();
+        }
         return null;
     }
 
@@ -136,6 +140,7 @@ public class Mediador implements IMediador {
         for (AbstractParticipante participante : participantes) {
             participante.computaPrejuizo(de, para);
         }
+        golpeCombo();
     }
 
     @Override
@@ -158,13 +163,23 @@ public class Mediador implements IMediador {
         System.out.println("pontos A (" + personagem_A.getNome() + "): " + personagem_A.getVida());
         System.out.println("pontos B (" + personagem_B.getNome() + "): " + personagem_B.getVida());
 
-        cenario.freeze();
+        String resultado = "HOUVE EMPATE!";
+        if (getVencedor() != null) {
+            resultado = getVencedor().getNome()
+                    + "\nGANHOU DE\n" + getVencedor().getPontos()
+                    + " X " + getOutroPersonagem(getVencedor()).getPontos();
+        }
+
+        cenario.setResultado(resultado);
+        cenario.placarFinal(null);
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(8000);
+                    cenario.freeze(getVencedor(), getOutroPersonagem(getVencedor()));
+                    Thread.sleep(8000);
                 } catch (InterruptedException ex) {
                     System.err.print("Erro ao esperar por terminar " + ex);
                 }
@@ -175,10 +190,48 @@ public class Mediador implements IMediador {
     }
 
     @Override
+    public Personagem getVencedor() {
+        if (personagem_A.getPontos() == personagem_B.getPontos()) {
+            return null;
+        }
+        if (personagem_A.getPontos() > personagem_B.getPontos()) {
+            return personagem_A;
+        }
+        return personagem_B;
+    }
+
+    @Override
     public void mouseEvent(MouseEvent e) {
         for (AbstractParticipante participante : participantes) {
             participante.mouseEvent(e);
         }
+    }
+
+    public void golpeCombo() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+//quem der 3 golpes diretos, 
+//pode aumentar a pontuacao em 20% e a vida de quem deu o golpe em 15%
+                int pontoA = personagem_A.getPontos();
+                int pontoB = personagem_B.getPontos();
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ex) {
+                    System.err.println("erro ao calcular combo " + ex);
+                }
+                if (personagem_A.getPontos() >= (pontoA + 3)) {
+                    personagem_A.addPontos((personagem_A.getPontos() / 100) * 20);
+                    personagem_A.setVida15();
+                    cenario.getPlacar().setTamcba(100);
+                }
+                if (personagem_B.getPontos() >= (pontoB + 3)) {
+                    personagem_B.addPontos((personagem_B.getPontos() / 100) * 20);
+                    personagem_B.setVida15();
+                    cenario.getPlacar().setTamcbb(100);
+                }
+            }
+        }).start();
     }
 
 }

@@ -41,4 +41,6 @@ public interface IMediador {
 
     public void mouseEvent(MouseEvent e);
 
+    public Personagem getVencedor();
+
 }

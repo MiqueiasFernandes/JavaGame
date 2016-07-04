@@ -7,6 +7,7 @@ package javagame.decorador;
 
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
+import javagame.estrategia.Estrategia;
 import javagame.model.Personagem;
 
 public class Corpo extends AbstractDecorador {
@@ -48,6 +49,11 @@ public class Corpo extends AbstractDecorador {
     public void recuando(Graphics graphics, ImageObserver imageObserver) {
         decorado.recuando(graphics, imageObserver);
         pintarImagem(recuando, imageObserver, graphics, true);
+    }
+
+    @Override
+    public int pontosAdescontar(Estrategia estrategia) {
+        return decorado.pontosAdescontar(estrategia) + 0;
     }
 
 }

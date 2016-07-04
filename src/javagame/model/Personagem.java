@@ -189,13 +189,30 @@ public class Personagem extends AbstractParticipante implements IComponente {
         this.pontos++;
     }
 
+    public void addPontos(int pontos) {
+        this.pontos += pontos;
+    }
+
     public int getVida() {
         return this.vida;
+    }
+
+    public void setVida15() {
+        this.vida += 15;//((vida / 100) * 15);
+        if (vida > 100) {
+            vida = 100;
+            pontos++;
+        }
     }
 
     @Override
     public void mouseEvent(MouseEvent e) {
 
+    }
+
+    @Override
+    public int pontosAdescontar(Estrategia estrategia) {
+        return 0;
     }
 
 }

@@ -22,7 +22,7 @@ public class Defendendo extends Estrategia {
 
     @Override
     public int calculaPrejuizo() {
-        return 0;
+        return  componente.pontosAdescontar(this);
     }
 
 }

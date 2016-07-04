@@ -7,6 +7,7 @@ package javagame.decorador;
 
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
+import javagame.estrategia.Estrategia;
 
 /**
  *
@@ -23,5 +24,7 @@ public interface IComponente {
     public void avancando(Graphics graphics, ImageObserver imageObserver);
 
     public void recuando(Graphics graphics, ImageObserver imageObserver);
+
+    public int pontosAdescontar(Estrategia estrategia);
 
 }

@@ -26,8 +26,8 @@ public class Placar extends AbstractParticipante {
 
     private int tempo = 100;
     private Color va = Color.cyan, vb = Color.GREEN, tp = Color.WHITE;
-    private final Image img_placar, help, ajuda;
-    private int tamHelp = 30;
+    private final Image img_placar, help, ajuda, comboa, combob;
+    private int tamHelp = 30, tamcba = 50, tamcbb = 50;
     private Rectangle helpTangle;
     private boolean showHelp = false;
 
@@ -36,9 +36,13 @@ public class Placar extends AbstractParticipante {
         String placar = (Personagem_Enum.cenarios_path + "placar.png");
         String _help = (Personagem_Enum.cenarios_path + "help.png");
         String _ajuda = (Personagem_Enum.cenarios_path + "ajuda.png");
+        String cbb = (Personagem_Enum.cenarios_path + "bonus-vermelho.gif");
+        String cba = (Personagem_Enum.cenarios_path + "bonus-azul.png");
         img_placar = Toolkit.getDefaultToolkit().getImage(placar);
         help = Toolkit.getDefaultToolkit().getImage(_help);
         ajuda = Toolkit.getDefaultToolkit().getImage(_ajuda);
+        comboa = Toolkit.getDefaultToolkit().getImage(cba);
+        combob = Toolkit.getDefaultToolkit().getImage(cbb);
 
         new Thread(() -> {
 
@@ -110,6 +114,20 @@ public class Placar extends AbstractParticipante {
         g.drawString(mediador.getPersonagemB().getNome().toUpperCase(),
                 x + (w / 2) + (w / 4),
                 (y + (h / 5) + (h / 6)));
+
+        g.drawImage(comboa,
+                x + w / 3, y + 30,
+                tamcba, tamcba, cenario);
+        g.drawImage(combob,
+                x + (w / 2) + (w / 13), y + 30,
+                tamcbb, tamcbb, cenario);
+
+        if (tamcba > 0) {
+             tamcba--;
+        }
+        if (tamcbb > 0) {
+              tamcbb--;
+        }
 
         if (helpTangle == null) {
             helpTangle = new Rectangle(x + w, y, tamHelp, tamHelp);
@@ -195,6 +213,14 @@ public class Placar extends AbstractParticipante {
 
     public void setShowHelp(boolean showHelp) {
         this.showHelp = showHelp;
+    }
+
+    public void setTamcba(int tamcba) {
+        this.tamcba = tamcba;
+    }
+
+    public void setTamcbb(int tamcbb) {
+        this.tamcbb = tamcbb;
     }
 
 }
