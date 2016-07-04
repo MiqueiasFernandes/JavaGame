@@ -45,7 +45,7 @@ public class ChooseView extends javax.swing.JFrame {
         panelFundo = new PaintPanel(image);
         cenarioLbl = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        goBtn = new javax.swing.JButton();
+        goBtn = new JButton(new javax.swing.ImageIcon("data/cenarios/botao-bora.png"));
         panelA = new PaintPanel(imagePanel);
         panelB = new PaintPanel(imagePanelB);
 
@@ -62,8 +62,6 @@ public class ChooseView extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("DejaVu Sans", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setText("SELECIONE SEU PERSONAGEM FAVORITO");
-
-        goBtn.setIcon(new javax.swing.ImageIcon("/home/mfernandes/NetBeansProjects/javaGame/data/cenarios/botao-bora.png")); // NOI18N
 
         panelA.setOpaque(false);
 

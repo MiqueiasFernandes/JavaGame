@@ -82,7 +82,7 @@
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="jogarBtn" min="-2" max="-2" attributes="0"/>
+                  <Component id="jogarBtn" min="-2" pref="362" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="350" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -112,14 +112,14 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="jogarBtn">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/mfernandes/NetBeansProjects/javaGame/data/cenarios/botao-jogar.png"/>
-            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JButton(new javax.swing.ImageIcon(&quot;data/cenarios/botao-jogar.png&quot;));"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="nomeATxt">
           <Properties>

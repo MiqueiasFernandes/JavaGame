@@ -22,7 +22,7 @@ public class Ocioso extends Estrategia {
 
     @Override
     public int calculaPrejuizo() {
-        return 10;
+        return 3;
     }
 
 }

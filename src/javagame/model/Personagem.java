@@ -29,7 +29,7 @@ public class Personagem extends AbstractParticipante implements IComponente {
     private Estrategia estrategia;
     private String nome;
     private final Personagem_Enum.Lado lado;
-    private int vida;
+    private int vida, pontos = 0;
     private ImageIcon icon;
 
     public Personagem(IMediador mediador, String nome, String personagem, Personagem_Enum.Lado lado) throws IOException {
@@ -163,13 +163,13 @@ public class Personagem extends AbstractParticipante implements IComponente {
 
     @Override
     public void computaPrejuizo(Personagem de, Personagem para) {
-
         //  System.out.println("esta encostando " + estaEncostando(para) + " vida " + vida + " prej " + estrategia.calculaPrejuizo());
         if (de == this) {
             return;
         }
         if (estaEncostando(de /* ESTE É O OUTRO PERSONAGEM */)) {
             vida -= estrategia.calculaPrejuizo();
+            de.addPontos();
         }
     }
 
@@ -179,6 +179,14 @@ public class Personagem extends AbstractParticipante implements IComponente {
                 ? (getX(true) + 130) >= outro.getX(true) && getX(true) < outro.getX()
                 : (getX(true) - 130) <= outro.getX(true) && getX(true) > outro.getX();
 
+    }
+
+    public int getPontos() {
+        return pontos;
+    }
+
+    public void addPontos() {
+        this.pontos++;
     }
 
     public int getVida() {

@@ -9,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javagame.mediador.Mediador;
 import javagame.model.Personagem_Enum;
 import javagame.view.MainView;

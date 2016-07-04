@@ -115,11 +115,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="goBtn">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/mfernandes/NetBeansProjects/javaGame/data/cenarios/botao-bora.png"/>
-            </Property>
-          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JButton(new javax.swing.ImageIcon(&quot;data/cenarios/botao-bora.png&quot;));"/>
+          </AuxValues>
         </Component>
         <Container class="javax.swing.JPanel" name="panelA">
           <Properties>

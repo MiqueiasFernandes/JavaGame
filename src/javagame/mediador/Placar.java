@@ -6,6 +6,7 @@
 package javagame.mediador;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -24,7 +25,7 @@ import javagame.view.Cenario;
 public class Placar extends AbstractParticipante {
 
     private int tempo = 100;
-    private Color va = Color.cyan, vb = Color.GREEN, tp = Color.DARK_GRAY;
+    private Color va = Color.cyan, vb = Color.GREEN, tp = Color.WHITE;
     private final Image img_placar, help, ajuda;
     private int tamHelp = 30;
     private Rectangle helpTangle;
@@ -32,7 +33,7 @@ public class Placar extends AbstractParticipante {
 
     public Placar(IMediador mediador) {
         super(mediador);
-        String placar = (Personagem_Enum.cenarios_path + "score.png");
+        String placar = (Personagem_Enum.cenarios_path + "placar.png");
         String _help = (Personagem_Enum.cenarios_path + "help.png");
         String _ajuda = (Personagem_Enum.cenarios_path + "ajuda.png");
         img_placar = Toolkit.getDefaultToolkit().getImage(placar);
@@ -61,9 +62,9 @@ public class Placar extends AbstractParticipante {
 
     public void pintar(Graphics g, Cenario cenario) {
 
-        int x = cenario.getWidth() / 2 - ((cenario.getWidth() / 3) / 2);
+        int x = cenario.getWidth() / 4;
         int y = cenario.getHeight() / 50;
-        int w = cenario.getWidth() / 3;
+        int w = cenario.getWidth() / 2;
         int h = cenario.getHeight() / 6;
 
         if (img_placar != null) {
@@ -72,25 +73,47 @@ public class Placar extends AbstractParticipante {
 
         g.setColor(tp);
         ////progressbar tempo
-        g.fillRect(x + (w / 20), (y + (h / 2) + (h / 4) + (h / 30)),
+        g.fillRect(x + (w / 7),
+                (y + (h / 2) + (h / 4) + (h / 10)),
                 ((w - (w / 6)) * tempo) / (100),
-                h / 15);
+                h / 12);
+
+        Font f = new Font("Arial", Font.BOLD, 48);
+        Font old = g.getFont();
 
         ///progressbar vida a 
         g.setColor(va);
-        g.fillRect(x + (w / 25), (y + (h / 2) + (h / 7)),
-                ((w / 3) * getVidaA()) / (100),
-                h / 30);
-        g.drawString(mediador.getPersonagemA().getNome(), x + (w / 5), (y + (h / 2) + (h / 13)));
+        g.fillRect(x + (w / 15),
+                (y + (h / 2) - (h / 40)),
+                ((((w / 3) - (w / 25)) * getVidaA()) / (100)),
+                h / 9);
+        g.setFont(f);
+        int pontos = mediador.getPersonagemA().getPontos();
+        g.drawString(String.valueOf(pontos),
+                (w - (w / 9)) + (pontos < 10 ? (w / 50) : (-w / 80)), (y + (h / 2) + (h / 16)));
+        g.setFont(old);
+        g.drawString(mediador.getPersonagemA().getNome().toUpperCase(),
+                x + (w / 5),
+                (y + (h / 5) + (h / 6)));
 
         ///progressbar vida b
         g.setColor(vb);
-        g.fillRect(x + (w / 2) + (w / 16), (y + (h / 2) + (h / 7)),
-                ((w / 3) * getVidaB()) / (100),
-                h / 30);
-        g.drawString(mediador.getPersonagemB().getNome(), x + (w / 2) + (w / 5), (y + (h / 2) + (h / 13)));
+        g.fillRect(x + (w / 2) + (w / 7) + (w / 300),
+                (y + (h / 2) - (h / 24)),
+                (((w / 3) - (w / 25)) * getVidaB()) / (100),
+                h / 9);
+        g.setFont(f);
+        pontos = mediador.getPersonagemB().getPontos();
+        g.drawString(String.valueOf(pontos),
+                (w + (w / 50) + (pontos < 10 ? (w / 50) : (-w / 80))), (y + (h / 2) + (h / 16)));
+        g.setFont(old);
+        g.drawString(mediador.getPersonagemB().getNome().toUpperCase(),
+                x + (w / 2) + (w / 4),
+                (y + (h / 5) + (h / 6)));
 
-        helpTangle = new Rectangle(x + w, y, tamHelp, tamHelp);
+        if (helpTangle == null) {
+            helpTangle = new Rectangle(x + w, y, tamHelp, tamHelp);
+        }
         g.drawImage(help, x + w, y, tamHelp, tamHelp, cenario);
 
         if (showHelp) {

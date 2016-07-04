@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
@@ -21,9 +22,7 @@ import java.io.IOException;
 import javagame.mediador.Mediador;
 import javagame.model.Personagem_Enum;
 import javagame.view.ChooseView;
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -41,8 +40,7 @@ public class ChoosePresenter {
     private ChooseView view;
     private int pos = 0;
     private final Mediador mediador;
-    private final String palavrasInvalidas[] = {"botao", "ajuda", "help", "score", "game", "panel"};
-    private Image backGround = null;
+    private Image backGround = null, seta;
 
     public ChoosePresenter(String nomeA, String nomeB, Mediador mediador) throws IOException {
 
@@ -50,11 +48,24 @@ public class ChoosePresenter {
         view = new ChooseView();
         view.getPainelA().setBorder(BorderFactory
                 .createTitledBorder(BorderFactory.createEmptyBorder(), nomeA.toUpperCase(),
-                        TitledBorder.LEFT, TitledBorder.DEFAULT_POSITION, view.getCenarioLbl().getFont(), Color.YELLOW));
+                        TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION, view.getCenarioLbl().getFont(), Color.YELLOW));
         view.getPainelB().setBorder(BorderFactory
                 .createTitledBorder(BorderFactory.createEmptyBorder(), nomeB.toUpperCase(),
-                        TitledBorder.RIGHT, TitledBorder.DEFAULT_POSITION, view.getCenarioLbl().getFont(), Color.BLUE));
+                        TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION, view.getCenarioLbl().getFont(), Color.BLUE));
 
+        seta = Toolkit.getDefaultToolkit()
+                .getImage(Personagem_Enum.cenarios_path + "seta.gif");
+
+        ImageIcon ico
+                = new ImageIcon(Toolkit.getDefaultToolkit()
+                        .getImage(Personagem_Enum.cenarios_path + "fundo-jogar.gif")
+                        .getScaledInstance(view.getGoBtn().getWidth(),
+                                view.getGoBtn().getHeight(), java.awt.Image.SCALE_FAST));
+
+        view.getGoBtn().setIcon(ico);
+        view.getGoBtn().setBackground(Color.red);
+        view.getGoBtn().setOpaque(false);
+        view.getGoBtn().setBorderPainted(false);
         popularPainel(view.getPainelA());
         popularPainel(view.getPainelB());
 
@@ -83,19 +94,25 @@ public class ChoosePresenter {
         view.setState(JFrame.MAXIMIZED_BOTH);
         view.setExtendedState(JFrame.MAXIMIZED_BOTH);
         view.getPainelDeFundo().setImage(backGround = Toolkit.getDefaultToolkit()
-                .getImage((Personagem_Enum.cenarios_path + "suspense.gif")));
+                .getImage((Personagem_Enum.cenarios_path + "cenario-suspense.gif")));
+
         view.setVisible(true);
     }
 
     private void chooseCenario() {
 
         String cenarios[] = new File(Personagem_Enum.cenarios_path).list();
-
+        int cont = 0;
         if (cenarios != null) {
-            String cenario = cenarios[(pos++ % cenarios.length)];
+            String cenario;
 
-            if ((cenario.contains(".jpg") || cenario.contains(".png") || cenario.contains(".gif"))
-                    && taLimpo(cenario)) {
+            while (!taLimpo(cenario = cenarios[(pos++ % cenarios.length)])) {
+                if (cont++ > 500) {
+                    return;
+                }
+            }
+
+            if ((cenario.contains(".jpg") || cenario.contains(".png") || cenario.contains(".gif"))) {
 
                 backGround = Toolkit.getDefaultToolkit()
                         .getImage(Personagem_Enum.cenarios_path + cenario);
@@ -109,12 +126,7 @@ public class ChoosePresenter {
     }
 
     boolean taLimpo(String palavra) {
-        for (String invalid : palavrasInvalidas) {
-            if (palavra.contains(invalid)) {
-                return false;
-            }
-        }
-        return true;
+        return palavra.contains("cenario-");
     }
 
     void popularPainel(JPanel panel) {
@@ -131,17 +143,29 @@ public class ChoosePresenter {
                     ImageIcon iconReal = new ImageIcon(Personagem_Enum.personagens_path + nome + ".gif");
                     Image img = iconReal.getImage();
                     Image newimg = img.getScaledInstance(w / 3, h, java.awt.Image.SCALE_FAST);
+                    Image iconM = img.getScaledInstance(w / 2, h + (h / 5), java.awt.Image.SCALE_FAST);
 
-                    Image iconM = img.getScaledInstance(w / 2, h, java.awt.Image.SCALE_FAST);
-                    ImageIcon icoSe = new ImageIcon(iconM);
+                    Font font = view.getCenarioLbl().getFont();
+                    Font f = new Font(font.getName(), font.getStyle(), 18);
 
-                    JToggleButton button = new JToggleButton(nome, new ImageIcon(newimg)) {
-
+                    JToggleButton button = new JToggleButton(nome) {
                         @Override
-                        public Icon getSelectedIcon() {
-                            return icoSe;
+                        public void paint(Graphics g) {
+                            if (isSelected()) {
+                                g.drawImage(seta, 0, 0, null);
+                                g.translate(getWidth() / 7, -10);
+                                g.drawImage(iconM, 0, 0, null);
+                                g.translate(20, 10);
+                            } else {
+                                g.drawImage(newimg, 0, 0, null);
+                            }
+                            g.setFont(f);
+                            g.drawString(nome.toUpperCase(), 50, getHeight() / 2);
                         }
                     };
+
+                    button.setIcon(new ImageIcon(iconM));
+
                     if (rectangle == null) {
                         rectangle = new Rectangle(panel.getWidth() / 4, panel.getHeight() / 6, w, h);
                     } else {
@@ -150,13 +174,8 @@ public class ChoosePresenter {
                     button.setBounds(rectangle);
                     addActionButon(button, panel);
                     panel.add(button);
-                    /*para setOpaque funcionar*/
-                    button.setBackground(Color.WHITE);
-                    button.setBorderPainted(false);
-                    Font font = view.getCenarioLbl().getFont();
-                    button.setFont(new Font(font.getName(), font.getStyle(), 18));
+
                     button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                    button.setOpaque(false);
                     button.setVisible(true);
                 }
             }
@@ -184,37 +203,26 @@ public class ChoosePresenter {
     }
 
     void jogar(JPanel paneA, JPanel paneB) throws IOException, InterruptedException, JavaLayerException {
-
         for (Component component : paneA.getComponents()) {
-
             if (component instanceof JToggleButton) {
                 JToggleButton btn = (JToggleButton) component;
                 if (btn.isSelected()) {
-
                     personagem_A = btn.getText();
-
                 }
-
             }
         }
 
         for (Component component : paneB.getComponents()) {
-
             if (component instanceof JToggleButton) {
                 JToggleButton btn = (JToggleButton) component;
                 if (btn.isSelected()) {
-
                     personagem_B = btn.getText();
 
                 }
-
             }
         }
-
         if (personagem_A != null && personagem_B != null) {
-
             mediador.inicializar(personagem_A, personagem_B, backGround);
-
             view.dispose();
         }
 

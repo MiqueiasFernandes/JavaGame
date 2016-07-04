@@ -5,6 +5,7 @@
  */
 package javagame.view;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -27,6 +28,8 @@ public class MainView extends javax.swing.JFrame {
         fundo = Toolkit.getDefaultToolkit()
                 .getImage(Personagem_Enum.cenarios_path + "fundo.jpg");
         initComponents();
+        jogarBtn.setBackground(Color.red);
+        jogarBtn.setOpaque(false);
     }
 
     /**
@@ -39,7 +42,7 @@ public class MainView extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBase = new PaintPanel(fundo);
-        jogarBtn = new javax.swing.JButton();
+        jogarBtn = new JButton(new javax.swing.ImageIcon("data/cenarios/botao-jogar.png"));
         nomeATxt = new javax.swing.JTextField();
         nomeBTxt = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -57,7 +60,6 @@ public class MainView extends javax.swing.JFrame {
         panelBase.setBorder(null);
         panelBase.setForeground(new java.awt.Color(254, 254, 254));
 
-        jogarBtn.setIcon(new javax.swing.ImageIcon("/home/mfernandes/NetBeansProjects/javaGame/data/cenarios/botao-jogar.png")); // NOI18N
         jogarBtn.setBorder(null);
         jogarBtn.setBorderPainted(false);
 
@@ -108,7 +110,7 @@ public class MainView extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBaseLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jogarBtn)
+                .addComponent(jogarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(350, 350, 350))
         );
         panelBaseLayout.setVerticalGroup(
